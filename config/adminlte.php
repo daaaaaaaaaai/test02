@@ -337,6 +337,11 @@ return [
             'text' => 'inventory_control',
             'icon' => 'fas fa-regular fa-folder',
             'submenu' => [
+                [   // 入庫
+                    'text' => 'goods_receive',
+                    'url'  => 'goods_receive',
+                    'icon' => '',
+                ],
                 [   // 在庫
                     'text' => 'inventory',
                     'url'  => 'inventory',
