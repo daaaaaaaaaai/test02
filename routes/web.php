@@ -9,14 +9,21 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\ResponseRateController;
 use App\Http\Controllers\PrefectureController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\MarginController;
+use App\Http\Controllers\RemoteCostController;
+use App\Http\Controllers\TypeController;
+use App\Http\Controllers\TypeValueController;
 
 // マスタコントローラ
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LisencePlateCostController;
+use App\Http\Controllers\CaliController;
 
 // トランザクションコントローラ
+use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\SalesOrderController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InventoryController;
@@ -45,10 +52,16 @@ Route::resource('country',CountryController::class);                        // (
 Route::resource('unit',UnitController::class);                              // (カスタマイズ)数量単位
 Route::resource('responserate',ResponseRateController::class);              // (カスタマイズ)レス率
 Route::resource('prefecture',PrefectureController::class);                  // (カスタマイズ)都道府県
+Route::resource('color',ColorController::class);                            // (カスタマイズ)色コード表
+Route::resource('margin',MarginController::class);                          // (カスタマイズ)スズキ店格マージン
+Route::resource('remotecost',RemoteCostController::class);                  // (カスタマイズ)遠方登録費用
+Route::resource('type',TypeController::class);                              // (カスタマイズ)種別
+Route::resource('typevalue',TypeValueController::class);                    // (カスタマイズ)種別値
 Route::resource('user', UserController::class);                             // (マスタ)ユーザ
 Route::resource('material', MaterialController::class);                     // (マスタ)商品
 Route::resource('customer', CustomerController::class);                     // (マスタ)顧客
 Route::resource('lisenceplatecost', LisencePlateCostController::class);     // (マスタ)ナンバープレート費用
+Route::resource('cali', CaliController::class);                             // (マスタ)自賠責保険
 Route::resource('quotation', QuotationController::class);                   // (トランザクション)見積
 Route::resource('salesorder', SalesOrderController::class);                 // (トランザクション)受注
 Route::resource('invoice', InvoiceController::class);                       // (トランザクション)請求

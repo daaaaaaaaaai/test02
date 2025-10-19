@@ -16,7 +16,7 @@ class ClassificationController extends Controller
         //$classifications=Classification::all();
         //$classifications = Classification::withTrashed()->paginate(10);
         $classifications=Classification::paginate(10);
-        return view('classification.index',compact('classifications'));
+        return view('customize.classification.index',compact('classifications'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ClassificationController extends Controller
     public function create()
     {
         //
-        return view('classification.create');
+        return view('customize.classification.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class ClassificationController extends Controller
         Classification::create($request->all());
 
         $request->session()->flash('message','登録しました');
-        return redirect(route('classification.index'));
+        return redirect(route('customize.classification.index'));
     }
 
     /**
@@ -59,7 +59,7 @@ class ClassificationController extends Controller
     public function edit(Classification $classification)
     {
         //
-        return view('classification.edit', compact('classification'));
+        return view('customize.classification.edit', compact('classification'));
     }
 
     /**

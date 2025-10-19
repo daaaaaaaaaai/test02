@@ -10,6 +10,14 @@ use App\Http\Requests\LisencePlateCostRequest;
 
 class LisencePlateCostController extends Controller
 {
+    // Controller内の共通変数
+    private $sep;
+
+    public function __construct()
+    {
+        $this->sep = config('id_separator');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -18,7 +26,7 @@ class LisencePlateCostController extends Controller
         //
         //$costs = LisencePlateCost::withTrashed()->paginate(20);
         $costs = LisencePlateCost::withTrashed()->get();
-        return view('lisenceplatecost.index', compact('costs'));
+        return view('master.lisenceplatecost.index', compact('costs'));
     }
 
     /**
@@ -29,7 +37,7 @@ class LisencePlateCostController extends Controller
         //
         $prefs=Prefecture::all();
         $cost=new LisencePlateCost;
-        return view('lisenceplatecost.edit', compact('cost','prefs'))->with('mode', 'create');
+        return view('master.lisenceplatecost.edit', compact('cost','prefs'))->with('mode', 'create');
     }
 
     /**
@@ -69,13 +77,13 @@ class LisencePlateCostController extends Controller
     public function edit($id)
     {
         //
-        [$prefecture, $pref_etc] = explode('-', $id);
+        [$prefecture, $pref_etc] = explode($sep, $id);
 
         $cost = LisencePlateCost::where('prefecture', $prefecture)
-                                    ->where('pref_etc', $pref_etc)
-                                    ->firstOrFail();
+                                ->where('pref_etc', $pref_etc)
+                                ->firstOrFail();
         $prefs=Prefecture::all();
-        return view('lisenceplatecost.edit', compact('cost','prefs'))->with('mode', 'edit');
+        return view('master.lisenceplatecost.edit', compact('cost','prefs'))->with('mode', 'edit');
     }
 
     /**
@@ -106,7 +114,7 @@ class LisencePlateCostController extends Controller
     public function destroy(LisencePlateCostRequest $request, $id)
     {
         //
-        [$prefecture, $pref_etc] = explode('-', $id);
+        [$prefecture, $pref_etc] = explode($sep, $id);
 
         $cost = LisencePlateCost::withTrashed()
                     ->where('prefecture', $prefecture)
@@ -122,7 +130,6 @@ class LisencePlateCostController extends Controller
                 ->where('pref_etc', $pref_etc)
                 ->restore();
             $request->session()->flash('message','復元しました');
-            return redirect()->route('lisenceplatecost.index');
         }else{
             // 有効な場合はsoftdelete
             //$cost->delete();
@@ -130,7 +137,8 @@ class LisencePlateCostController extends Controller
                 ->where('pref_etc', $pref_etc)
                 ->delete();
             $request->session()->flash('message','削除しました');
-            return redirect()->route('lisenceplatecost.index');
         }
+
+        return redirect()->route('lisenceplatecost.index');
     }
 }

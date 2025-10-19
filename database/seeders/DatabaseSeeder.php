@@ -33,12 +33,18 @@ class DatabaseSeeder extends Seeder
             UnitSeeder::class,
             ResponseRateSeeder::class,
             PrefectureSeeder::class,
+            ColorSeeder::class,
+            MarginSeeder::Class,
+            RemoteCostSeeder::Class,
+            TypeSeeder::Class,
+            TypeValueSeeder::Class,
 
             MaterialSeeder::class,
             CustomerSeeder::class,
             LisencePlateCostSeeder::class,
+            CaliSeeder::class,
 
-            //SalesOrderSeeder::class,
+            SalesOrderSeeder::class,
         ]);
     }
 }

@@ -14,7 +14,7 @@ class PrefectureController extends Controller
     {
         //
         $prefectures=Prefecture::paginate(10);
-        return view('prefecture.index',compact('prefectures'));
+        return view('customize.prefecture.index',compact('prefectures'));
     }
 
     /**
@@ -23,7 +23,7 @@ class PrefectureController extends Controller
     public function create()
     {
         //
-        return view('prefecture.create');
+        return view('customize.prefecture.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class PrefectureController extends Controller
     public function edit(Prefecture $prefecture)
     {
         //
-        return view('prefecture.edit', compact('prefecture'));
+        return view('customize.prefecture.edit', compact('prefecture'));
     }
 
     /**

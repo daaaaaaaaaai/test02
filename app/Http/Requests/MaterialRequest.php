@@ -96,6 +96,7 @@ class MaterialRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        dd($validator->errors()); // ← これでエラー内容を確認
+        //dd($validator->errors()); // ← これでエラー内容を確認
+        logger($this->all());       // 画面が停止しない(strage\logs\laravel.log)
     }
 }

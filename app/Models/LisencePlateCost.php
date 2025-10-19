@@ -28,6 +28,7 @@ class LisencePlateCost extends Model
     // 複合キーをまとめる
     public function getRouteKey()
     {
-        return $this->prefecture . '-' . $this->pref_etc;
+        $sep = config('id_separator');
+        return $this->prefecture . $sep . $this->pref_etc;
     }
 }

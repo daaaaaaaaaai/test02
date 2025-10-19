@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('material_name',60)->comment('商品名');
             $table->string('color',60)->comment('カラー');
             $table->string('model',60)->comment('モデル');
-            $table->double('price_make',11,2)->comment('単価');
+            $table->double('quantity',11,3)->comment('数量');
+            $table->char('unit',2)->comment('単位');
+            $table->double('unit_price',11,2)->comment('単価');
             $table->double('net_price',13,2)->comment('金額');
             $table->string('class_code',20)->comment('分類');
             $table->string('text_item',255)->comment('明細テキスト');

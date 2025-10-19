@@ -14,7 +14,7 @@ class JapaneseCalendarController extends Controller
     {
         //
         $japaneseCalendars=JapaneseCalendar::paginate(10);
-        return view('japanesecalendar.index',compact('japaneseCalendars'));
+        return view('customize.japanesecalendar.index',compact('japaneseCalendars'));
     }
 
     /**
@@ -23,7 +23,7 @@ class JapaneseCalendarController extends Controller
     public function create()
     {
         //
-        return view('japanesecalendar.create');
+        return view('customize.japanesecalendar.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class JapaneseCalendarController extends Controller
     public function edit(JapaneseCalendar $japaneseCalendar)
     {
         //
-        return view('japanesecalendar.edit', compact('japaneseCalendar'));
+        return view('customize.japanesecalendar.edit', compact('japaneseCalendar'));
     }
 
     /**

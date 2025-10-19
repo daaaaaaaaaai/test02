@@ -3,6 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Traits\NumberingTrait;
+use App\Models\Customer;
+use App\Models\Material;
+use App\Models\Classification;
+use App\Models\Country;
+use App\Models\Unit;
+use App\Models\TaxRate;
+use App\Models\SalesOrderHeader;
+use App\Models\SalesOrderItem;
 
 class InvoiceController extends Controller
 {
@@ -12,6 +22,9 @@ class InvoiceController extends Controller
     public function index()
     {
         //
+        $headers = SalesOrderHeader::where('order_type','Invoice')->withTrashed()->paginate(10);
+        $title = __('Invoice');
+        return view('transaction.salesorder.index', compact('headers','title'));
     }
 
     /**

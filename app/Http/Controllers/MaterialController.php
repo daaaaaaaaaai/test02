@@ -25,7 +25,7 @@ class MaterialController extends Controller
         //
         //$materials = Material::all();
         $materials = Material::withTrashed()->paginate(10);
-        return view('material.index', compact('materials'));
+        return view('master.material.index', compact('materials'));
     }
 
     /**
@@ -41,7 +41,7 @@ class MaterialController extends Controller
         $taxs=TaxRate::whereDate('start_date','<=',date('Y-m-d'))->whereDate('end_date','>=',date('Y-m-d'))->get();
         $response_rates=ResponseRate::all();
         $material=new Material;
-        return view('material.edit', compact('material','classifications','countries','units','taxs','response_rates'))->with('mode', 'create');
+        return view('master.material.edit', compact('material','classifications','countries','units','taxs','response_rates'))->with('mode', 'create');
     }
 
     /**
@@ -62,7 +62,7 @@ class MaterialController extends Controller
 
         // 商品コード未入力時は自動採番
         if(empty($validated['material_code'])){
-            $validated['material_code']=$this->nextNumber('Material',18);
+            $validated['master.material_code']=$this->nextNumber('Material',18);
         }
 
         // ここで保存処理やレスポンス処理を行う
@@ -92,7 +92,7 @@ class MaterialController extends Controller
         $units=Unit::all();
         $taxs=TaxRate::whereDate('start_date','<=',date('Y-m-d'))->whereDate('end_date','>=',date('Y-m-d'))->get();
         $response_rates=ResponseRate::whereDate('start_date','<=',date('Y-m-d'))->whereDate('end_date','>=',date('Y-m-d'))->get();
-        return view('material.edit', compact('material','classifications','countries','units','taxs','response_rates'))->with('mode', 'edit');
+        return view('master.material.edit', compact('material','classifications','countries','units','taxs','response_rates'))->with('mode', 'edit');
     }
 
     /**
@@ -126,16 +126,17 @@ class MaterialController extends Controller
         //
         //dd($material);
         $material = Material::withTrashed()->findOrFail($id);
+        
         if($material->trashed()){
             // 削除されている場合はrestore
             $material->restore();
             $request->session()->flash('message','復元しました');
-            return redirect()->route('material.index');
         }else{
             // 有効な場合はsoftdelete
             $material->delete();
             $request->session()->flash('message','削除しました');
-            return redirect()->route('material.index');
         }
+
+        return redirect()->route('material.index');
     }
 }

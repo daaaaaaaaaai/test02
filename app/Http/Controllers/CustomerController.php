@@ -20,7 +20,7 @@ class CustomerController extends Controller
     {
         //
         $customers = Customer::withTrashed()->paginate(10);
-        return view('customer.index', compact('customers'));
+        return view('master.customer.index', compact('customers'));
     }
 
     /**
@@ -31,7 +31,7 @@ class CustomerController extends Controller
         //
         $prefectures=Prefecture::all();
         $customer=new customer;
-        return view('customer.edit',compact('customer','prefectures'))->with('mode','create');
+        return view('master.customer.edit',compact('customer','prefectures'))->with('mode','create');
     }
 
     /**
@@ -76,7 +76,7 @@ class CustomerController extends Controller
     {
         //
         $prefectures=Prefecture::all();
-        return view('customer.edit',compact('customer','prefectures'))->with('mode','edit');
+        return view('master.customer.edit',compact('customer','prefectures'))->with('mode','edit');
     }
 
     /**

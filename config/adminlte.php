@@ -317,8 +317,8 @@ return [
             'icon' => 'fas fa-regular fa-folder',
             'submenu' => [
                 [   // 見積
-                    'text' => 'quatation',
-                    'url'  => 'quatation',
+                    'text' => 'quotation',
+                    'url'  => 'quotation',
                     'icon' => '',
                 ],
                 [   // 受注
@@ -375,8 +375,13 @@ return [
                     'icon' => '',
                 ],
                 [
-                    'text' => 'lisenceplatecost',
+                    'text' => 'lisence_plate_cost',
                     'url' => 'lisenceplatecost',
+                    'icon' => '',
+                ],
+                [
+                    'text' => 'compulsory_automobile_liability_insurance',
+                    'url' => 'cali',
                     'icon' => '',
                 ],
             ],
@@ -386,14 +391,18 @@ return [
             'icon' => 'fas fa-regular fa-folder',
             'submenu' => [
                 ['text' => 'country',           'url' => 'country',          'icon' => '',],
+                ['text' => 'prefecture',        'url' => 'prefecture',       'icon' => '',],
                 ['text' => 'unit',              'url' => 'unit',             'icon' => '',],
                 ['text' => 'classification',    'url' => 'classification',   'icon' => '',],
                 ['text' => 'number_range',      'url' => 'numberrange',      'icon' => '',],
                 ['text' => 'taxrate',           'url' => 'taxrate',          'icon' => '',],
                 ['text' => 'japanese_calendar', 'url' => 'japanesecalendar', 'icon' => '',],
+                ['text' => 'type',              'url' => 'type',             'icon' => '',],
+                ['text' => 'type_value',        'url' => 'typevalue',        'icon' => '',],
                 ['text' => 'response_rate',     'url' => 'responserate',     'icon' => '',],
-                ['text' => 'prefecture',        'url' => 'prefecture',       'icon' => '',],
-                ['text' => 'city',              'url' => 'city',             'icon' => '',],
+                ['text' => 'color',             'url' => 'color',            'icon' => '',],
+                ['text' => 'margin',            'url' => 'margin',           'icon' => '',],
+                ['text' => 'remote_cost',       'url' => 'remotecost',       'icon' => '',],
             ],
         ],
         ['header' => 'account_settings'],

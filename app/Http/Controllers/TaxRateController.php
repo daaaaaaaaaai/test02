@@ -14,7 +14,7 @@ class TaxRateController extends Controller
     {
         //
         $taxRates=TaxRate::paginate(10);
-        return view('taxrate.index',compact('taxRates'));
+        return view('customize.taxrate.index',compact('taxRates'));
     }
 
     /**
@@ -23,7 +23,7 @@ class TaxRateController extends Controller
     public function create()
     {
         //
-        return view('taxrate.create');
+        return view('customize.customize.taxrate.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class TaxRateController extends Controller
     public function edit(TaxRate $taxRate)
     {
         //
-        return view('taxrate.edit', compact('taxRate'));
+        return view('customize.taxrate.edit', compact('taxRate'));
     }
 
     /**

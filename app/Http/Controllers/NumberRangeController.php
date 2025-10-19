@@ -14,7 +14,7 @@ class NumberRangeController extends Controller
     {
         //
         $numberRanges=NumberRange::paginate(10);
-        return view('numberrange.index',compact('numberRanges'));
+        return view('customize.numberrange.index',compact('numberRanges'));
     }
 
     /**
@@ -23,7 +23,7 @@ class NumberRangeController extends Controller
     public function create()
     {
         //
-        return view('numberrange.create');
+        return view('customize.numberrange.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class NumberRangeController extends Controller
     public function edit(NumberRange $numberRange)
     {
         //
-        return view('numberrange.edit', compact('numberRange'));
+        return view('customize.numberrange.edit', compact('numberRange'));
     }
 
     /**

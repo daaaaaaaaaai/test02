@@ -14,7 +14,7 @@ class CountryController extends Controller
     {
         //
         $countries=Country::paginate(10);
-        return view('country.index',compact('countries'));
+        return view('customize.country.index',compact('countries'));
     }
 
     /**
@@ -23,7 +23,7 @@ class CountryController extends Controller
     public function create()
     {
         //
-        return view('country.create');
+        return view('customize.country.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class CountryController extends Controller
     public function edit(Country $country)
     {
         //
-        return view('country.edit', compact('country'));
+        return view('customize.country.edit', compact('country'));
     }
 
     /**

@@ -14,7 +14,7 @@ class ResponseRateController extends Controller
     {
         //
         $responseRates=ResponseRate::paginate(10);
-        return view('responserate.index',compact('responseRates'));
+        return view('customize.responserate.index',compact('responseRates'));
     }
 
     /**
@@ -23,7 +23,7 @@ class ResponseRateController extends Controller
     public function create()
     {
         //
-        return view('responserate.create');
+        return view('customize.responserate.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class ResponseRateController extends Controller
     public function edit(ResponseRate $responseRate)
     {
         //
-        return view('responserate.edit', compact('responseRate'));
+        return view('customize.responserate.edit', compact('responseRate'));
     }
 
     /**

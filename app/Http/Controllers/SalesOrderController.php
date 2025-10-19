@@ -25,9 +25,9 @@ class SalesOrderController extends Controller
     public function index()
     {
         //
-        $headers = SalesOrderHeader::withTrashed()->paginate(10);
-        $title = '受注';
-        return view('salesorder.index', compact('headers','title'));
+        $headers = SalesOrderHeader::where('order_type','SalesOrder')->withTrashed()->paginate(10);
+        $title = __('SalesOrder');
+        return view('transaction.salesorder.index', compact('headers','title'));
     }
 
     /**
@@ -41,7 +41,7 @@ class SalesOrderController extends Controller
         $header = new SalesOrderHeader;
         $items = new SalesOrderItem;
         $title = '受注';
-        return view('salesorder.edit', compact('header', 'items', 'customer', 'materials','title'))->with('mode', 'create');
+        return view('transaction.salesorder.edit', compact('header', 'items', 'customer', 'materials','title'))->with('mode', 'create');
     }
 
     /**
@@ -84,7 +84,7 @@ class SalesOrderController extends Controller
     {
         //
         $salesorder = SalesOrder::findOrFail($order_number);
-        return view('sakesorder.show', compact('salesorder'));
+        return view('transaction.sakesorder.show', compact('salesorder'));
     }
 
     /**
@@ -96,7 +96,7 @@ class SalesOrderController extends Controller
         $salesorder = SalesOrder::with('salesorderItems')->findOrFail($order_number);
         $customers = Customer::all();
         $materials = Material::all();
-        return view('salesorder.edit', compact('salesorder', 'customers', 'materials'));
+        return view('transaction.salesorder.edit', compact('salesorder', 'customers', 'materials'));
     }
 
     /**
