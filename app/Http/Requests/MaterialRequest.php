@@ -26,11 +26,6 @@ class MaterialRequest extends FormRequest
         // 数値項目だけを指定（カンマ除去対象）
         $this->removeCommaFromFields([
             'engine',
-            'unit_price',
-            'base_amount',
-            'special_margin',
-            'cr1',
-            'cr2',
         ]);
     }
 
@@ -55,28 +50,21 @@ class MaterialRequest extends FormRequest
             'material_name' => ['required', 'string', 'max:60'],
             'class_code' => ['required', 'string'],
             'model' => ['nullable', 'string', 'max:40'],
-            'color' => ['nullable', 'string', 'max:40'],
-            'engine' => ['nullable', 'numeric'],
+            'engine' => ['nullable', 'numeric', 'max:9999'],
             'coo' => ['nullable', 'string'],
             'unit' => ['required', 'string'],
-            'response_code' => ['nullable', 'string'],
-            'response_rate' => ['nullable', 'numeric'],
-            'unit_price' => ['required', 'numeric', 'min:0', 'max:999999999.99'],
-            'unit_tax' => ['required', 'numeric', 'min:0', 'max:999999999.99'],
-            'unit_amount' => ['required', 'numeric', 'min:0', 'max:99999999999.99'],
-            'sikr_price' => ['nullable', 'numeric', 'min:0', 'max:999999999.99'],
-            'sikr_tax' => ['nullable', 'numeric', 'min:0', 'max:999999999.99'],
-            'sikr_amount' => ['nullable', 'numeric', 'min:0', 'max:99999999999.99'],
-            'base_price' => ['nullable', 'numeric', 'min:0', 'max:9999999.99'],
-            'base_tax' => ['nullable', 'numeric', 'min:0', 'max:9999999.99'],
-            'base_amount' => ['nullable', 'numeric', 'min:0', 'max:99999999999.99'],
-            'basic_margin' => ['nullable', 'numeric', 'min:0', 'max:999999999.99'],
-            'special_margin' => ['nullable', 'numeric', 'min:0', 'max:999999999.99'],
-            'cr1' => ['nullable', 'numeric', 'min:0', 'max:999999999.99'],
-            'cr2' => ['nullable', 'numeric', 'min:0', 'max:999999999.99'],
-            'r' => ['nullable', 'numeric', 'min:0', 'max:999999999.99'],
-            'tax_code' => ['required', 'string'],
-            'tax_rate' => ['nullable', 'numeric'],
+            'payment_type' => ['nullable', 'string'],
+            'cali_type' => ['nullable', 'string'],
+            'theft_type' => ['nullable', 'string'],
+            'cr1_type1' => ['nullable', 'string'],
+            'cr1_type2' => ['nullable', 'string'],
+            'zrex_type' => ['nullable', 'string'],
+            'zrmt_type' => ['nullable', 'string'],
+            'color_code01' => ['nullable', 'string'],
+            'color_code02' => ['nullable', 'string'],
+            'color_code03' => ['nullable', 'string'],
+            'color_code04' => ['nullable', 'string'],
+            'color_code05' => ['nullable', 'string'],
             'text_material' => ['nullable', 'string', 'max:255'],
             'remarks_material' => ['nullable', 'string', 'max:1024'],
         ];
@@ -97,6 +85,6 @@ class MaterialRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         //dd($validator->errors()); // ← これでエラー内容を確認
-        logger($this->all());       // 画面が停止しない(strage\logs\laravel.log)
+        //logger($this->all());       // 画面が停止しない(strage\logs\laravel.log)
     }
 }

@@ -1,36 +1,36 @@
 <?php
 
 // カスタマイズコントローラ
-use App\Http\Controllers\ClassificationController;
-use App\Http\Controllers\NumberRangeController;
-use App\Http\Controllers\TaxRateController;
-use App\Http\Controllers\JapaneseCalendarController;
-use App\Http\Controllers\CountryController;
-use App\Http\Controllers\UnitController;
-use App\Http\Controllers\ResponseRateController;
-use App\Http\Controllers\PrefectureController;
-use App\Http\Controllers\ColorController;
-use App\Http\Controllers\MarginController;
-use App\Http\Controllers\RemoteCostController;
-use App\Http\Controllers\TypeController;
-use App\Http\Controllers\TypeValueController;
+use App\Http\Controllers\Customizes\ClassificationController;
+use App\Http\Controllers\Customizes\NumberRangeController;
+use App\Http\Controllers\Customizes\TaxRateController;
+use App\Http\Controllers\Customizes\JapaneseCalendarController;
+use App\Http\Controllers\Customizes\CountryController;
+use App\Http\Controllers\Customizes\UnitController;
+use App\Http\Controllers\Customizes\ResponseRateController;
+use App\Http\Controllers\Customizes\PrefectureController;
+use App\Http\Controllers\Customizes\ColorController;
+use App\Http\Controllers\Customizes\MarginController;
+use App\Http\Controllers\Customizes\RemoteCostController;
+use App\Http\Controllers\Customizes\TypeController;
+use App\Http\Controllers\Customizes\TypeValueController;
 
 // マスタコントローラ
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\MaterialController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\LisencePlateCostController;
-use App\Http\Controllers\CaliController;
+use App\Http\Controllers\Masters\UserController;
+use App\Http\Controllers\Masters\MaterialController;
+use App\Http\Controllers\Masters\CustomerController;
+use App\Http\Controllers\Masters\LisencePlateCostController;
+use App\Http\Controllers\Masters\CaliController;
 
 // トランザクションコントローラ
-use App\Http\Controllers\QuotationController;
-use App\Http\Controllers\SalesOrderController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\PhysicalInventoryController;
+use App\Http\Controllers\Transactions\QuotationController;
+use App\Http\Controllers\Transactions\SalesOrderController;
+use App\Http\Controllers\Transactions\InvoiceController;
+use App\Http\Controllers\Transactions\InventoryController;
+use App\Http\Controllers\Transactions\PhysicalInventoryController;
 
 // APIコントローラ
-use App\Http\Controllers\ZipcodeController;
+use App\Http\Controllers\APIs\ZipcodeController;
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;

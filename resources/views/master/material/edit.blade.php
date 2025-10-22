@@ -66,10 +66,10 @@
                     <select name="class_code"
                             class="form-control @error('class_code') is-invalid @enderror">
                         <option value="">{{__('select value')}}</option>
-                        @foreach ($classifications as $classification)
-                            <option value="{{$classification->class_code}}"
-                                        {{old('class_code',$material->class_code)===$classification->class_code ? 'selected' : ''}}>
-                                {{$classification->class_name}}
+                        @foreach ($classes as $class)
+                            <option value="{{$class->class_code}}"
+                                        {{old('class_code',$material->class_code)===$class->class_code ? 'selected' : ''}}>
+                                {{$class->class_name}}
                             </option>
                         @endforeach
                     </select>
@@ -79,6 +79,8 @@
                         </span>
                     @enderror
                 </td>
+            </tr>
+            <tr>
                 <!-- 機種名 -->
                 <th class="border border-gray-400">{{__('model')}}</th>
                 <td class="border border-gray-400">
@@ -91,20 +93,6 @@
                         </span>
                     @enderror
                 </td>
-                <!-- カラー -->
-                <th class="border border-gray-400">{{__('color')}}</th>
-                <td class="border border-gray-400">
-                    <input type="text" name="color"
-                        class="form-control @error('color') is-invalid @enderror"
-                        value="{{old('color',$material->color)}}" autofocus/>
-                    @error('color')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </td>
-            </tr>
-            <tr>
                 <!-- 排気量 -->
                 <th class="border border-gray-400">{{__('engine')}}</th>
                 <td class="border border-gray-400">
@@ -122,6 +110,8 @@
                         </span>
                     @enderror
                 </td>
+            </tr>
+            <tr>
                 <!-- 生産国 -->
                 <th class="border border-gray-400">{{__('coo')}}</th>
                 <td class="border border-gray-400">
@@ -140,10 +130,8 @@
                         </span>
                     @enderror
                 </td>
-            </tr>
-            <tr>
                 <!-- 数量単位 -->
-                <th class="border border-gray-400">{{__('unit')}}<div class="label-required float-right">必須</div></th>
+                <th class="border border-gray-400">{{__('unit')}}</th>
                 <td class="border border-gray-400">
                     <select name="unit" class="form-control @error('unit') is-invalid @enderror">
                         <option value="">{{__('select value')}}</option>
@@ -160,245 +148,102 @@
                         </span>
                     @enderror
                 </td>
-                <!-- 税コード -->
-                <th class="border border-gray-400">{{__('tax_code')}}<div class="label-required float-right">必須</div></th>
+            </tr>
+            <tr>
+                <!-- 納準種別 -->
+                <th class="border border-gray-400">{{__('payment_type')}}</th>
                 <td class="border border-gray-400">
-                    <select name="tax_code" class="form-control @error('tax_code') is-invalid @enderror">
+                    <select name="payment_type" class="form-control">
                         <option value="">{{__('select value')}}</option>
-                        @foreach ($taxs as $tax)
-                            <option value="{{$tax->tax_code}}"
-                                    data-taxrate="{{$tax->tax_rate / 100}}"
-                                    {{ old('tax_code',$material->tax_code)===$tax->tax_code ? 'selected' : '' }}>
-                                {{$tax->text}}
+                        @foreach ($payment_types as $payment_type)
+                            <option value="{{$payment_type->value}}"
+                                        {{old('payment_type',$material->payment_type)===$payment_type->value ? 'selected' : ''}}>
+                                {{$payment_type->text}}
                             </option>
                         @endforeach
                     </select>
-                    @error('tax_code')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </td>
-            </tr>
-            <tr>
-                <!-- 基本マージン -->
-                <th class="border border-gray-400">{{__('basic_margin')}}</th>
+                <!-- 自賠責種別 -->
+                <th class="border border-gray-400">{{__('cali_type')}}</th>
                 <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="basic_margin_display" id="basic_margin_display"
-                        class="form-control text-right"
-                        value="{{old('basic_margin',number_format($material->basic_margin ?? 0))}}"
-                        readonly/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="basic_margin" id="basic_margin_hidden"
-                        value="{{ old('basic_margin', $material->basic_margin ?? 0) }}">
-                </td>
-                <!-- 特別マージン -->
-                <th class="border border-gray-400">{{__('special_margin')}}</th>
-                <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="special_margin_display" id="special_margin_display" data-decimal="false"
-                        class="form-control text-right @error('special_margin') is-invalid @enderror"
-                        value="{{old('special_margin',number_format($material->special_margin ?? 0))}}"
-                        autofocus/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="special_margin" id="special_margin_hidden"
-                        value="{{ old('special_margin', $material->special_margin ?? 0) }}">
-                    @error('special_margin')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </td>
-                <!-- レス率 -->
-                <th class="border border-gray-400">{{__('response_rate')}}</th>
-                <td class="border border-gray-400">
-                    <select name="response_code" class="form-control @error('response_code') is-invalid @enderror">
+                    <select name="cali_type" class="form-control">
                         <option value="">{{__('select value')}}</option>
-                        @foreach ($response_rates as $response_rate)
-                            <option value="{{$response_rate->response_code}}"
-                                    data-resrate="{{$response_rate->response_rate / 100}}"
-                                    {{ old('response_code',$material->response_code)===$response_rate->response_code ? 'selected' : '' }}>
-                                {{$response_rate->text}}
+                        @foreach ($cali_types as $cali_type)
+                            <option value="{{$cali_type->value}}"
+                                        {{old('cali_type',$material->cali_type)===$cali_type->value ? 'selected' : ''}}>
+                                {{$cali_type->text}}
                             </option>
                         @endforeach
                     </select>
-                    @error('response_code')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                </td>
+                <!-- 盗難種別 -->
+                <th class="border border-gray-400">{{__('theft_type')}}</th>
+                <td class="border border-gray-400">
+                    <select name="theft_type" class="form-control">
+                        <option value="">{{__('select value')}}</option>
+                        @foreach ($theft_types as $theft_type)
+                            <option value="{{$theft_type->value}}"
+                                        {{old('theft_type',$material->theft_type)===$theft_type->value ? 'selected' : ''}}>
+                                {{$theft_type->text}}
+                            </option>
+                        @endforeach
+                    </select>
                 </td>
             </tr>
             <tr>
-                <!-- CR① -->
-                <th class="border border-gray-400">{{__('cr1')}}</th>
+                <!-- CR1種別① -->
+                <th class="border border-gray-400">{{__('cr1_type1')}}</th>
                 <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="cr1_display" id="cr1_display" data-decimal="false"
-                        class="form-control text-right @error('cr1') is-invalid @enderror"
-                        value="{{old('cr1',number_format($material->cr1 ?? 0))}}"
-                        autofocus/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="cr1" id="cr1_hidden"
-                        value="{{ old('cr1', $material->cr1 ?? 0) }}">
-                    @error('cr1')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <select name="cr1_type1" class="form-control">
+                        <option value="">{{__('select value')}}</option>
+                        @foreach ($cr1_types1 as $cr1_type1)
+                            <option value="{{$cr1_type1->value}}"
+                                        {{old('cr1_type1',$material->cr1_type1)===$cr1_type1->value ? 'selected' : ''}}>
+                                {{$cr1_type1->text}}
+                            </option>
+                        @endforeach
+                    </select>
                 </td>
-                <!-- CR② -->
-                <th class="border border-gray-400">{{__('cr2')}}</th>
+                <!-- CR1種別② -->
+                <th class="border border-gray-400">{{__('cr1_type2')}}</th>
                 <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="cr2_display" id="cr2_display" data-decimal="false"
-                        class="form-control text-right @error('cr2') is-invalid @enderror"
-                        value="{{old('cr2',number_format($material->cr2 ?? 0))}}" autofocus/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="cr2" id="cr2_hidden"
-                        value="{{ old('cr2', $material->cr2 ?? 0) }}">
-                    @error('cr2')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </td>
-                <!-- R -->
-                <th class="border border-gray-400">{{__('r')}}</th>
-                <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="r_display" id="r_display" data-decimal="false"
-                        class="form-control input-sm text-right"
-                        value="{{ old('r',number_format($material->r ?? 0)) }}"
-                        readonly/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="r" id="r_hidden"
-                        value="{{ old('r', $material->r ?? 0) }}">
+                    <select name="cr1_type2" class="form-control">
+                        <option value="">{{__('select value')}}</option>
+                        @foreach ($cr1_types2 as $cr1_type2)
+                            <option value="{{$cr1_type2->value}}"
+                                        {{old('cr1_type2',$material->cr1_type2)===$cr1_type2->value ? 'selected' : ''}}>
+                                {{$cr1_type2->text}}
+                            </option>
+                        @endforeach
+                    </select>
                 </td>
             </tr>
             <tr>
-                <!-- 定価税抜 -->
-                <th class="border border-gray-400">{{__('unit_price')}}<div class="label-required float-right">必須</div></th>
+                <!-- ZR延長種別 -->
+                <th class="border border-gray-400">{{__('zrex_type')}}</th>
                 <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="unit_price_display" id="unit_price_display" data-decimal="false"
-                        class="form-control text-right @error('unit_price') is-invalid @enderror"
-                        value="{{old('unit_price',number_format($material->unit_price ?? 0))}}"
-                        autofocus/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="unit_price" id="unit_price_hidden"
-                        value="{{ old('unit_price', $material->unit_price ?? 0) }}">
-                    @error('unit_price')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <select name="zrex_type" class="form-control">
+                        <option value="">{{__('select value')}}</option>
+                        @foreach ($zrex_types as $zrex_type)
+                            <option value="{{$zrex_type->value}}"
+                                        {{old('zrex_type',$material->zrex_type)===$zrex_type->value ? 'selected' : ''}}>
+                                {{$zrex_type->text}}
+                            </option>
+                        @endforeach
+                    </select>
                 </td>
-                <!-- 税額 -->
-                <th class="border border-gray-400">{{__('unit_tax')}}</th>
+                <!-- ZR車両種別 -->
+                <th class="border border-gray-400">{{__('zrmt_type')}}</th>
                 <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="unit_tax_diplay" id="unit_tax_display"
-                        class="form-control input-sm text-right"
-                        value="{{ old('unit_tax', $material->unit_tax ?? 0) }}"
-                        readonly/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="unit_tax" id="unit_tax_hidden"
-                        value="{{ old('unit_tax', $material->unit_tax ?? 0) }}">
-                </td>
-                <!-- 定価税込 -->
-                <th class="border border-gray-400">{{__('unit_amount')}}</th>
-                <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="unit_amount_display" id="unit_amount_display"
-                        class="form-control input-sm text-right"
-                        value="{{ old('unit_amount', $material->unit_amount ?? 0) }}"
-                        readonly/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="unit_amount" id="unit_amount_hidden"
-                        value="{{ old('unit_amount', $material->unit_amount ?? 0) }}">
-                </td>
-            </tr>
-            <tr>
-                <!-- 仕切価格税抜 -->
-                <th class="border border-gray-400">{{__('sikr_price')}}</th>
-                <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="sikr_price_display" id="sikr_price_display"
-                        class="form-control input-sm text-right"
-                        value="{{ old('sikr_price', $material->sikr_price ?? 0) }}"
-                        readonly/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="sikr_price" id="sikr_price_hidden"
-                        value="{{ old('sikr_price', $material->sikr_price ?? 0) }}">
-                </td>
-                <!-- 税額 -->
-                <th class="border border-gray-400">{{__('sikr_tax')}}</th>
-                <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="sikr_tax_display" id="sikr_tax_display"
-                        class="form-control input-sm text-right"
-                        value="{{ old('sikr_tax', $material->sikr_tax ?? 0) }}"
-                        readonly/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="sikr_tax" id="sikr_tax_hidden"
-                        value="{{ old('sikr_tax', $material->sikr_tax ?? 0) }}">
-                </td>
-                <!-- 仕切価格税込 -->
-                <th class="border border-gray-400">{{__('sikr_amount')}}</th>
-                <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="sikr_amount_display" id="sikr_amount_display"
-                        class="form-control input-sm text-right"
-                        value="{{ old('sikr_amount', $material->sikr_amount ?? 0) }}"
-                        readonly/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="sikr_amount" id="sikr_amount_hidden"
-                        value="{{ old('sikr_amount', $material->sikr_amount ?? 0) }}">
-                </td>
-            </tr>
-            <tr>
-                <!-- 車体価格税抜 -->
-                <th class="border border-gray-400">{{__('base_price')}}</th>
-                <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="base_price_display" id="base_price_display"
-                        class="form-control input-sm text-right"
-                        value="{{ old('base_price', $material->base_price ?? 0) }}"
-                        readonly/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="base_price" id="base_price_hidden"
-                        value="{{ old('base_price', $material->base_price ?? 0) }}">
-                </td>
-                <!-- 税額 -->
-                <th class="border border-gray-400">{{__('base_tax')}}</th>
-                <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="base_tax_display" id="base_tax_display"
-                        class="form-control input-sm text-right"
-                        value="{{ old('base_tax', $material->base_tax ?? 0) }}"
-                        readonly/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="base_tax" id="base_tax_hidden"
-                        value="{{ old('base_tax', $material->base_tax ?? 0) }}">
-                </td>
-                <!-- 車体価格税込 -->
-                <th class="border border-gray-400">{{__('base_amount')}}</th>
-                <td class="border border-gray-400">
-                    {{-- 表示用 --}}
-                    <input type="text" name="base_amount_display" id="base_amount_display" data-decimal="false"
-                        class="form-control text-right @error('base_amount') is-invalid @enderror"
-                        value="{{old('base_amount',number_format($material->base_amount,0 ?? 0))}}"
-                        autofocus/>
-                    {{-- 送信用 --}}
-                    <input type="hidden" name="base_amount" id="base_amount_hidden"
-                        value="{{ old('base_amount', $material->base_amount ?? 0) }}">
-                    @error('base_amount')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <select name="zrmt_type" class="form-control">
+                        <option value="">{{__('select value')}}</option>
+                        @foreach ($zrmt_types as $zrmt_type)
+                            <option value="{{$zrmt_type->value}}"
+                                        {{old('zrmt_type',$material->zrmt_type)===$zrmt_type->value ? 'selected' : ''}}>
+                                {{$zrmt_type->text}}
+                            </option>
+                        @endforeach
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -416,6 +261,186 @@
                 </td>
             </tr>
         </table>
+
+        <br>
+
+        <!-- カラー -->
+        <table class="zmente text-sm">
+            <colgroup>
+                <col width="20%"/>
+                <col width="20%"/>
+                <col width="20%"/>
+                <col width="20%"/>
+                <col width="20%"/>
+            </colgroup>
+            <!-- ヘッダ -->
+            <tr>
+                <th class="border border-gray-400">{{__('color_code01')}}</th>
+                <th class="border border-gray-400">{{__('color_code02')}}</th>
+                <th class="border border-gray-400">{{__('color_code03')}}</th>
+                <th class="border border-gray-400">{{__('color_code04')}}</th>
+                <th class="border border-gray-400">{{__('color_code05')}}</th>
+            </tr>
+            <!-- 色コード選択 -->
+            <tr>
+                <td class="border border-gray-400">
+                    <select name="color_code01" class="form-control">
+                        <option value="">{{__('select value')}}</option>
+                        @foreach ($colors as $color)
+                            <option value="{{$color->color_code}}"
+                                        {{old('color_code01',$material->color_code01)===$color->color_code ? 'selected' : ''}}>
+                                {{$color->color_code}} {{$color->color_name1}} ** {{$color->color_name2}}
+                            </option>
+                        @endforeach
+                    </select>
+                </td>
+                <td class="border border-gray-400">
+                    <select name="color_code02" class="form-control">
+                        <option value="">{{__('select value')}}</option>
+                        @foreach ($colors as $color)
+                            <option value="{{$color->color_code}}"
+                                        {{old('color_code02',$material->color_code02)===$color->color_code ? 'selected' : ''}}>
+                                {{$color->color_code}} {{$color->color_name1}} ** {{$color->color_name2}}
+                            </option>
+                        @endforeach
+                    </select>
+                </td>
+                <td class="border border-gray-400">
+                    <select name="color_code03" class="form-control">
+                        <option value="">{{__('select value')}}</option>
+                        @foreach ($colors as $color)
+                            <option value="{{$color->color_code}}"
+                                        {{old('color_code03',$material->color_code03)===$color->color_code ? 'selected' : ''}}>
+                                {{$color->color_code}} {{$color->color_name1}} ** {{$color->color_name2}}
+                            </option>
+                        @endforeach
+                    </select>
+                </td>
+                <td class="border border-gray-400">
+                    <select name="color_code04" class="form-control">
+                        <option value="">{{__('select value')}}</option>
+                        @foreach ($colors as $color)
+                            <option value="{{$color->color_code}}"
+                                        {{old('color_code04',$material->color_code04)===$color->color_code ? 'selected' : ''}}>
+                                {{$color->color_code}} {{$color->color_name1}} ** {{$color->color_name2}}
+                            </option>
+                        @endforeach
+                    </select>
+                </td>
+                <td class="border border-gray-400">
+                    <select name="color_code05" class="form-control">
+                        <option value="">{{__('select value')}}</option>
+                        @foreach ($colors as $color)
+                            <option value="{{$color->color_code}}"
+                                        {{old('color_code05',$material->color_code05)===$color->color_code ? 'selected' : ''}}>
+                                {{$color->color_code}} {{$color->color_name1}} ** {{$color->color_name2}}
+                            </option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            <!-- 色コード -->
+            <tr>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_code01_txt"
+                        class="form-control"
+                        value="{{old('color_code01',$material->color_code01)}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_code02_txt"
+                        class="form-control"
+                        value="{{old('color_code02',$material->color_code02)}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_code03_txt"
+                        class="form-control"
+                        value="{{old('color_code03',$material->color_code03)}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_code04_txt"
+                        class="form-control"
+                        value="{{old('color_code04',$material->color_code04)}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_code05_txt"
+                        class="form-control"
+                        value="{{old('color_code05',$material->color_code05)}}"
+                        readonly autofocus/>
+                </td>
+            </tr>
+            <!-- 色名1 -->
+            <tr>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_name1_01"
+                        class="form-control"
+                        value="{{old('color_name1_01')}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_name1_02"
+                        class="form-control"
+                        value="{{old('color_name1_02')}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_name1_03"
+                        class="form-control"
+                        value="{{old('color_name1_03')}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_name1_04"
+                        class="form-control"
+                        value="{{old('color_name1_04')}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_name1_05"
+                        class="form-control"
+                        value="{{old('color_name1_05')}}"
+                        readonly autofocus/>
+                </td>
+            </tr>
+            <!-- 色名2 -->
+            <tr>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_name2_01"
+                        class="form-control"
+                        value="{{old('color_name2_01')}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_name2_02"
+                        class="form-control"
+                        value="{{old('color_name2_02')}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_name2_03"
+                        class="form-control"
+                        value="{{old('color_name2_03')}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_name2_04"
+                        class="form-control"
+                        value="{{old('color_name2_04')}}"
+                        readonly autofocus/>
+                </td>
+                <td class="border border-gray-400">
+                    <input type="text" name="color_name2_05"
+                        class="form-control"
+                        value="{{old('color_name2_05')}}"
+                        readonly autofocus/>
+                </td>
+            </tr>
+        </table>
+
+        <br>
 
         <!-- 商品備考 -->
         <div calss="w-full flex flex-col">
@@ -474,45 +499,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // NumberFormat 初期化(入力項目のみ)
-            ['#engine_display','#special_margin_display','#cr1_display','#cr2_display','#unit_price_display','#base_amount_display']
+            ['#engine_display']
                 .forEach(id => NumberFormat.init(id));
-
-            // 計算セットアップ
-            const calcUnit = setupCalculatorInMaterial({
-                unitPriceInput:'#unit_price_display',
-                unitTaxOutput:'#unit_tax_display',
-                unitAmountOutput:'#unit_amount_display',
-                bcmarginOutput:'#basic_margin',
-                spmarginInput:'#special_margin_display',
-                cr1Input:'#cr1_display_display',
-                cr2Input:'#cr2_display_display',
-                grossPriceOutput:'#sikr_price_display',
-                grossTaxOutput:'#sikr_tax_display',
-                grossAmountOutut:'#sikr_amount_display',
-                basePriceOutput:'#base_price_display',
-                baseTaxOutput:'#base_tax_display',
-                baseAmountInput:'#base_amount_display',
-                rOutput:'#r',
-                // 共通関数を利用して税率・レス率を取得
-                getTaxRate: () => getSelectedData("tax_code", "taxrate", 0.1),
-                getResRate: () => getSelectedData("response_code", "resrate", 0),
-            });
-
-            // イベント登録(率変更時に再計算)
-            const taxSelect = document.querySelector('[name="tax_code"]');
-            if (taxSelect) {
-                taxSelect.addEventListener('change', () => {
-                    console.log("税率変更:", taxSelect.value, "→", getSelectedData("tax_code", "taxrate"));
-                    calcUnit();
-                });
-            }
-            const resSelect = document.querySelector('[name="response_code"]');
-            if (resSelect) {
-                resSelect.addEventListener('change', () => {
-                    //console.log("レス率変更:", resSelect.value, "→", getSelectedData("response_code", "resrate"));
-                    calcUnit();
-                });
-            }
         });
     </script>
 @stop
