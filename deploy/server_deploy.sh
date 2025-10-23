@@ -60,7 +60,19 @@ else
 fi
 
 # Set permissions (adjust user/group as needed)
-chown -R $(whoami):$(whoami) "$TARGET_DIR"
+USER_NAME=$(whoami)
+# prefer primary group name; if id -gn fails, fall back to username
+GROUP_NAME=$(id -gn 2>/dev/null || true)
+if [ -z "$GROUP_NAME" ]; then
+  GROUP_NAME="$USER_NAME"
+fi
+log "Setting ownership to $USER_NAME:$GROUP_NAME"
+if chown -R "$USER_NAME:$GROUP_NAME" "$TARGET_DIR" 2>/dev/null; then
+  :
+else
+  log "Warning: group $GROUP_NAME may not exist; setting owner only"
+  chown -R "$USER_NAME" "$TARGET_DIR" || true
+fi
 find "$TARGET_DIR" -type d -exec chmod 755 {} +
 find "$TARGET_DIR" -type f -exec chmod 644 {} +
 
