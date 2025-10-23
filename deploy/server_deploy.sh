@@ -10,7 +10,7 @@ set -euo pipefail
 
 #########################
 # Configuration (edit or export as env vars)
-REPO="git@github.com:daaaaaaaaaai/test02.git"
+REPO="https://github.com/daaaaaaaaaai/test02.git"
 BRANCH="main"
 DEPLOY_PATH="/virtual/xdaidaix/public_html/test02"   # path that will contain `releases/` and `current`
 KEEP_RELEASES=5
@@ -38,9 +38,18 @@ mkdir -p "$TARGET_DIR"
 
 # Prefer using git archive over SSH to avoid leaving .git on the server
 if command -v git >/dev/null 2>&1; then
-  log "Using git archive to export repository (no .git created)"
-  # If the server's SSH key is set as a deploy key on GitHub this will work
-  git archive --remote="$REPO" "$BRANCH" | tar -x -C "$TARGET_DIR"
+  log "Attempting git archive to export repository (no .git created)"
+  # Try git archive first; GitHub may not support git-upload-archive, so fall back to shallow clone on failure
+  if git archive --remote="$REPO" "$BRANCH" | tar -x -C "$TARGET_DIR"; then
+    log "git archive succeeded"
+  else
+    log "git archive failed, falling back to shallow clone and rsync"
+    tmpdir="/tmp/deploy_$RELEASE_DIR"
+    rm -rf "$tmpdir" && mkdir -p "$tmpdir"
+    git clone --depth 1 --branch "$BRANCH" "$REPO" "$tmpdir"
+    rsync -a --delete --exclude='.git' "$tmpdir/" "$TARGET_DIR/"
+    rm -rf "$tmpdir"
+  fi
 else
   log "git not available: falling back to shallow clone and cleanup"
   tmpdir="/tmp/deploy_$RELEASE_DIR"
