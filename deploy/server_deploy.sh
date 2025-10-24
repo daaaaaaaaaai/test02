@@ -12,7 +12,9 @@ set -euo pipefail
 # Configuration (edit or export as env vars)
 REPO="https://github.com/daaaaaaaaaai/test02.git"
 BRANCH="main"
-DEPLOY_PATH="/virtual/xdaidaix/public_html/test02"   # path that will contain `releases/` and `current`
+# Separate releases storage (outside webroot) and the public webroot
+RELEASE_ROOT="/virtual/xdaidaix/releases/test02"   # where releases are stored (outside webroot)
+WEBROOT="/virtual/xdaidaix/public_html/test02"     # the actual public folder that must be a physical directory
 KEEP_RELEASES=5
 
 # Optional toggles
@@ -30,11 +32,13 @@ fi
 
 BRANCH=${1:-$BRANCH}
 RELEASE_DIR="$(timestamp)"
-TARGET_DIR="$DEPLOY_PATH/releases/$RELEASE_DIR"
+TARGET_DIR="$RELEASE_ROOT/$RELEASE_DIR"
 
 log "Starting deploy of $REPO#$BRANCH to $TARGET_DIR"
 
 mkdir -p "$TARGET_DIR"
+mkdir -p "$RELEASE_ROOT"
+mkdir -p "$(dirname "$WEBROOT")"
 
 # Prefer using git archive over SSH to avoid leaving .git on the server
 if command -v git >/dev/null 2>&1; then
@@ -76,35 +80,59 @@ fi
 find "$TARGET_DIR" -type d -exec chmod 755 {} +
 find "$TARGET_DIR" -type f -exec chmod 644 {} +
 
-# Symlink switch
-ln -nfs "$TARGET_DIR" "$DEPLOY_PATH/current"
-log "Switched current -> $TARGET_DIR"
+# Publish: copy the new release into the WEBROOT as a physical directory (avoid symlink)
+log "Publishing release to webroot (physical copy)"
+TMP_WEBROOT="${WEBROOT}.__tmp__.$(timestamp)"
+# remove any previous tmp
+rm -rf "$TMP_WEBROOT"
+mkdir -p "$(dirname "$TMP_WEBROOT")"
+
+# Use rsync to create a new webroot copy, excluding .git
+rsync -a --delete --exclude='.git' "$TARGET_DIR/" "$TMP_WEBROOT/"
+
+# set ownership and perms on tmp webroot
+if chown -R "$USER_NAME:$GROUP_NAME" "$TMP_WEBROOT" 2>/dev/null; then :; else chown -R "$USER_NAME" "$TMP_WEBROOT" || true; fi
+find "$TMP_WEBROOT" -type d -exec chmod 755 {} +
+find "$TMP_WEBROOT" -type f -exec chmod 644 {} +
+
+# Atomically swap: remove any existing symlink or directory, then move tmp into place
+if [ -L "$WEBROOT" ]; then
+  log "Removing existing symlink at $WEBROOT"
+  rm -f "$WEBROOT"
+fi
+if [ -d "$WEBROOT" ]; then
+  log "Backing up existing directory to ${WEBROOT}.backup.$(timestamp)"
+  mv "$WEBROOT" "${WEBROOT}.backup.$(timestamp)" || true
+fi
+
+mv "$TMP_WEBROOT" "$WEBROOT"
+log "Published $WEBROOT -> $TARGET_DIR"
 
 # Optional post-deploy steps
 if [ "$RUN_COMPOSER" = true ] ; then
-  if command -v composer >/dev/null 2>&1 || [ -f "$DEPLOY_PATH/current/composer.phar" ]; then
+  if command -v composer >/dev/null 2>&1 || [ -f "$WEBROOT/composer.phar" ]; then
     log "Running composer install (no-dev, optimize-autoloader)"
-    (cd "$DEPLOY_PATH/current" && if command -v composer >/dev/null 2>&1; then composer install --no-dev --optimize-autoloader; else php composer.phar install --no-dev --optimize-autoloader; fi)
+    (cd "$WEBROOT" && if command -v composer >/dev/null 2>&1; then composer install --no-dev --optimize-autoloader; else php82cli composer.phar install --no-dev --optimize-autoloader; fi)
   else
     log "composer not found on server; skipping composer install"
   fi
 fi
 
 if [ "$RUN_ARTISAN" = true ] ; then
-  if command -v php >/dev/null 2>&1; then
+  if command -v php82cli >/dev/null 2>&1; then
     log "Running artisan commands: migrate (force) + cache rebuild"
-    (cd "$DEPLOY_PATH/current" && php artisan migrate --force || true)
-    (cd "$DEPLOY_PATH/current" && php artisan config:cache || true)
-    (cd "$DEPLOY_PATH/current" && php artisan route:cache || true)
-    (cd "$DEPLOY_PATH/current" && php artisan view:cache || true)
+    (cd "$WEBROOT" && php82cli artisan migrate --force || true)
+    (cd "$WEBROOT" && php82cli artisan config:cache || true)
+    (cd "$WEBROOT" && php82cli artisan route:cache || true)
+    (cd "$WEBROOT" && php82cli artisan view:cache || true)
   else
-    log "php not found on server; skipping artisan tasks"
+    log "php82cli not found on server; skipping artisan tasks"
   fi
 fi
 
 # Cleanup old releases
 log "Cleaning up old releases, keeping $KEEP_RELEASES"
-cd "$DEPLOY_PATH/releases"
+cd "$RELEASE_ROOT"
 ls -1tr | head -n -$KEEP_RELEASES | xargs -r rm -rf -- || true
 
 log "Deploy finished"

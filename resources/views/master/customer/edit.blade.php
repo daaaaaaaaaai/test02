@@ -242,10 +242,10 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="css/admin_custom.css">
 @stop
 
 @section('js')
     <script> console.log('Hi!'); </script>
-    <script type="text/javascript" src="/js/search_zip.js"></script>
+    <script type="text/javascript" src="js/search_zip.js"></script>
 @stop
