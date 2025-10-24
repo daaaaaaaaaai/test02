@@ -120,12 +120,12 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="css/admin_custom.css">
 @stop
 
 @section('js')
     <script> console.log('Hi!'); </script>
-    <script type="text/javascript" src="/js/number-format.js"></script>
+    <script type="text/javascript" src="js/number-format.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // NumberFormat 初期化
