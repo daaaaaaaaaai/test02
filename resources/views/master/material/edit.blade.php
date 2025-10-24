@@ -469,12 +469,12 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="css/admin_custom.css">
+    <link rel="stylesheet" href="{{asset('css/admin_custom.css')}}">
 @stop
 
 @section('js')
-    <script type="text/javascript" src="js/number-format.js"></script>
-    <script type="text/javascript" src="js/calculator.js"></script>
+    <script type="text/javascript" src="{{asset('js/number-format.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/calculator.js')}}"></script>
     <script>
         /**
          * 選択された <select> 要素の data-* 属性から数値を取得する共通関数
