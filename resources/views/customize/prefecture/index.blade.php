@@ -5,7 +5,7 @@
 @section('content_header')
     <h1>{{__('Prefecture')}}</h1>
     <div class="text-right flex text-sm">
-        <a href="{{route('city.create')}}">
+        <a href="{{route('prefecture.create')}}">
             <button class="btn btn-primary">
                 <span class="fas fa-solid fa-plus"></span>
                 &nbsp{{__('create')}}
@@ -66,7 +66,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="css/admin_custom.css">
+    <link rel="stylesheet" href="{{asset('css/admin_custom.css')}}">
 @stop
 
 @section('js')
