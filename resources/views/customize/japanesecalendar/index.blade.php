@@ -20,26 +20,26 @@
         <!-- これもコメント -->
         <x-message :message="session('message')" />
 
-        <table class="ztable border-separate border border-gray-400">
+        <table class="ztable fixed-1">
             <thead class="text-center">
                 <tr>
-                    <th class="p-2 border border-gray-300">{{__('start_date')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('end_date')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('japanese_date')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
-                    <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
+                    <th>{{__('start_date')}}</th>
+                    <th>{{__('end_date')}}</th>
+                    <th>{{__('japanese_date')}}</th>
+                    <th>{{__('created_at')}}</th>
+                    <th>{{__('updated_at')}}</th>
+                    <th colspan=2>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($japaneseCalendars as $japaneseCalendar)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$japaneseCalendar->start_date}}</td>
-                    <td class="p-2 border border-gray-300">{{$japaneseCalendar->end_date}}</td>
-                    <td class="p-2 border border-gray-300">{{$japaneseCalendar->japanese_date}}</td>
-                    <td class="p-2 border border-gray-300">{{$japaneseCalendar->created_at}}</td>
-                    <td class="p-2 border border-gray-300">{{$japaneseCalendar->updated_at}}</td>
-                    <td class="p-2 border border-gray-300">
+                    <td>{{$japaneseCalendar->start_date}}</td>
+                    <td>{{$japaneseCalendar->end_date}}</td>
+                    <td>{{$japaneseCalendar->japanese_date}}</td>
+                    <td>{{$japaneseCalendar->created_at}}</td>
+                    <td>{{$japaneseCalendar->updated_at}}</td>
+                    <td class="text-center">
                         <a href="{{route('japanesecalendar.edit',$japaneseCalendar)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
@@ -47,7 +47,7 @@
                             </button>
                         </a>
                     </td>
-                    <td class="p-2 border border-gray-300">
+                    <td class="text-center">
                         <form method="post" action="{{route('japanesecalendar.destroy',$japaneseCalendar)}}">
                             @csrf
                             @method('delete')

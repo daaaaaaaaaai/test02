@@ -1,0 +1,56 @@
+/*---------------------------------------------------------------------
+//  tableの横スクロール設定
+---------------------------------------------------------------------*/
+.ztable{
+    overflow-x: auto;               /* 横スクロールバーの表示 */
+    width: 100%;
+    display: block;
+}
+
+.ztable table{
+    min-width: 1000px;              /* 必要に応じて調整 */
+    border-collapse: collapse;
+}
+
+.ztable th{
+    position: sticky;
+    top: 0;                         /* ヘッダー行の固定 */
+    background-color: #cacaca;      /* 固定時の背景色 */
+    z-index: 10;                    /* 他の要素より上に表示 */
+    white-space: nowrap;            /* 折り返し防止で横スクロールを促す */
+    font-weight: 600;               /* やや太め */
+}
+
+.ztable td{
+    white-space: nowrap;            /* 折り返し防止で横スクロールを促す */
+}
+
+.ztable td:first-child {
+    position: sticky;
+    left: 0;                        /* 左端の列を固定 */
+    background-color: #ffffff;      /* 固定時の背景色 */
+    z-index: 5;
+}
+
+/*---------------------------------------------------------------------
+//  メンテナンス画面のth部分の背景色設定
+---------------------------------------------------------------------*/
+.zmente th{
+    background-color: #305183;      /* 背景色 */
+    color: #ffffff;                 /* 文字色 */
+    font-weight: normal;            /* やや太め */
+}
+
+/* 必須ラベル、任意ラベル用 */
+.label-required {
+    background-color: red;
+}
+.label-option {
+    background-color: green;
+}
+
+/* テーブルの項目名のセルに使用する少し濃い目の青 */
+.bg-summer-sky {
+    color: #ffffff;
+    background-color: #42afe3;
+}

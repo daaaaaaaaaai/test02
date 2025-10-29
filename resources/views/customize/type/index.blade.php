@@ -20,24 +20,24 @@
         <!-- これもコメント -->
         <x-message :message="session('message')" />
 
-        <table class="ztable border-separate border border-gray-400">
+        <table class="ztable fixed-1">
             <thead class="text-center">
                 <tr>
-                    <th class="p-2 border border-gray-300">{{__('type')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('text')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
-                    <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
+                    <th>{{__('type')}}</th>
+                    <th>{{__('text')}}</th>
+                    <th>{{__('created_at')}}</th>
+                    <th>{{__('updated_at')}}</th>
+                    <th colspan=2>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($types as $type)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$type->type}}</td>
-                    <td class="p-2 border border-gray-300">{{$type->text}}</td>
-                    <td class="p-2 border border-gray-300">{{$type->created_at}}</td>
-                    <td class="p-2 border border-gray-300">{{$type->updated_at}}</td>
-                    <td class="p-2 border border-gray-300">
+                    <td>{{$type->type}}</td>
+                    <td>{{$type->text}}</td>
+                    <td>{{$type->created_at}}</td>
+                    <td>{{$type->updated_at}}</td>
+                    <td class="text-center">
                         <a href="{{route('type.edit',$type)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
@@ -45,7 +45,7 @@
                             </button>
                         </a>
                     </td>
-                    <td class="p-2 border border-gray-300">
+                    <td class="text-center">
                         <form method="post" action="{{route('type.destroy',$type)}}">
                             @csrf
                             @method('delete')

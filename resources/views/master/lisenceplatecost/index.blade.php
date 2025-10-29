@@ -36,7 +36,7 @@
             <tbody>
                 @foreach($costs as $cost)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$cost->prefecture}}</td>
+                    <td class="p-2 border border-gray-300">{{$prefs[$cost->prefecture] ?? ''}}</td>
                     <td class="p-2 border border-gray-300">{{$cost->pref_etc}}</td>
                     <td class="p-2 border border-gray-300 text-right">{{number_format($cost->purchase_price)}}</td>
                     <td class="p-2 border border-gray-300 text-right">{{number_format($cost->sales_price)}}</td>

@@ -29,11 +29,11 @@ return new class extends Migration
             $table->string('created_by',10)->comment('登録ユーザID');
             $table->string('changed_by',10)->comment('変更ユーザID');
             $table->timestamps();
-            $table->softDeletes();
 
             $table->comment('顧客マスタ');
             $table->primary(['cust_code']);
             $table->unique(['cust_code']);
+            $table->softDeletes();
         });
     }
 

@@ -27,6 +27,8 @@ use Database\Seeders\Masters\CustomerSeeder;
 use Database\Seeders\Masters\LisencePlateCostSeeder;
 use Database\Seeders\Masters\MaterialSeeder;
 use Database\Seeders\Masters\UserSeeder;
+use Database\Seeders\Masters\SalesExpenseSeeder;
+use Database\Seeders\Masters\SuzukiDataSeeder;
 
 // トランザクションSeeder
 use Database\Seeders\Transactions\SalesOrderSeeder;
@@ -68,6 +70,8 @@ class DatabaseSeeder extends Seeder
             LisencePlateCostSeeder::class,
             MaterialSeeder::class,
             UserSeeder::class,
+            SalesExpenseSeeder::class,
+            SuzukiDataSeeder::class,
 
             SalesOrderSeeder::class,
         ]);

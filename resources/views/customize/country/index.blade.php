@@ -20,30 +20,30 @@
         <!-- これもコメント -->
         <x-message :message="session('message')" />
 
-        <table class="ztable border-separate border border-gray-400">
+        <table class="ztable fixed-1">
             <thead class="text-center">
                 <tr>
-                    <th class="p-2 border border-gray-300">{{__('country_code')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('country_name_j')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('country_name_e')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('country_code_a3')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('country_code_n3')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
-                    <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
+                    <th>{{__('country_code')}}</th>
+                    <th>{{__('country_name_j')}}</th>
+                    <th>{{__('country_name_e')}}</th>
+                    <th>{{__('country_code_a3')}}</th>
+                    <th>{{__('country_code_n3')}}</th>
+                    <th>{{__('created_at')}}</th>
+                    <th>{{__('updated_at')}}</th>
+                    <th colspan=2>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($countries as $country)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$country->country_code}}</td>
-                    <td class="p-2 border border-gray-300">{{$country->country_name_j}}</td>
-                    <td class="p-2 border border-gray-300">{{$country->country_name_e}}</td>
-                    <td class="p-2 border border-gray-300">{{$country->country_code_a3}}</td>
-                    <td class="p-2 border border-gray-300">{{$country->country_code_n3}}</td>
-                    <td class="p-2 border border-gray-300">{{$country->created_at}}</td>
-                    <td class="p-2 border border-gray-300">{{$country->updated_at}}</td>
-                    <td class="p-2 border border-gray-300">
+                    <td>{{$country->country_code}}</td>
+                    <td>{{$country->country_name_j}}</td>
+                    <td>{{$country->country_name_e}}</td>
+                    <td>{{$country->country_code_a3}}</td>
+                    <td>{{$country->country_code_n3}}</td>
+                    <td>{{$country->created_at}}</td>
+                    <td>{{$country->updated_at}}</td>
+                    <td class="text-center">
                         <a href="{{route('country.edit',$country)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
@@ -51,7 +51,7 @@
                             </button>
                         </a>
                     </td>
-                    <td class="p-2 border border-gray-300">
+                    <td class="text-center">
                         <form method="post" action="{{route('country.destroy',$country)}}">
                             @csrf
                             @method('delete')

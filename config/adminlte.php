@@ -316,42 +316,18 @@ return [
             'text' => 'sales_control',
             'icon' => 'fas fa-regular fa-folder',
             'submenu' => [
-                [   // 見積
-                    'text' => 'quotation',
-                    'url'  => 'quotation',
-                    'icon' => '',
-                ],
-                [   // 受注
-                    'text' => 'salesorder',
-                    'url'  => 'salesorder',
-                    'icon' => '',
-                ],
-                [   // 請求
-                    'text' => 'invoice',
-                    'url'  => 'invoice',
-                    'icon' => '',
-                ],
+                ['text' => 'quotation',     'url'  => 'quotation',  'icon' => '',],
+                ['text' => 'salesorder',    'url'  => 'salesorder', 'icon' => '',],
+                ['text' => 'invoice',       'url'  => 'invoice',    'icon' => '',],
             ],
         ],
         [
             'text' => 'inventory_control',
             'icon' => 'fas fa-regular fa-folder',
             'submenu' => [
-                [   // 入庫
-                    'text' => 'goods_receive',
-                    'url'  => 'goods_receive',
-                    'icon' => '',
-                ],
-                [   // 在庫
-                    'text' => 'inventory',
-                    'url'  => 'inventory',
-                    'icon' => '',
-                ],
-                [   // 実地棚卸
-                    'text' => 'physical_inventory',
-                    'url'  => 'physical_inventory',
-                    'icon' => '',
-                ],
+                ['text' => 'goods_receive',         'url'  => 'goods_receive',      'icon' => '',],
+                ['text' => 'inventory',             'url'  => 'inventory',          'icon' => '',],
+                ['text' => 'physical_inventory',    'url'  => 'physical_inventory', 'icon' => '',],
             ],
         ],
         ['header' => 'user_menu'],
@@ -359,31 +335,13 @@ return [
             'text' => 'master',
             'icon' => 'fas fa-regular fa-folder',
             'submenu' => [
-                [
-                    'text' => 'user',
-                    'url' => 'user',
-                    'icon' => '',
-                ],
-                [
-                    'text' => 'material',
-                    'url' => 'material',
-                    'icon' => '',
-                ],
-                [
-                    'text' => 'customer',
-                    'url' => 'customer',
-                    'icon' => '',
-                ],
-                [
-                    'text' => 'lisence_plate_cost',
-                    'url' => 'lisenceplatecost',
-                    'icon' => '',
-                ],
-                [
-                    'text' => 'compulsory_automobile_liability_insurance',
-                    'url' => 'cali',
-                    'icon' => '',
-                ],
+                ['text' => 'user',                                      'url' => 'user',                'icon' => '',],
+                ['text' => 'material',                                  'url' => 'material',            'icon' => '',],
+                ['text' => 'customer',                                  'url' => 'customer',            'icon' => '',],
+                ['text' => 'lisence_plate_cost',                        'url' => 'lisenceplatecost',    'icon' => '',],
+                ['text' => 'compulsory_automobile_liability_insurance', 'url' => 'cali',                'icon' => '',],
+                ['text' => 'sales_expenses',                            'url' => 'salesexpense',        'icon' => '',],
+                ['text' => 'suzuki_data',                               'url' => 'suzukidata',          'icon' => '',],
             ],
         ],
         [

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Masters;
 
 use App\Models\Masters\Cali;
+use App\Models\Customizes\TypeValue;
 //use Illuminate\Http\Request;
 use App\Http\Requests\CaliRequest;
 
@@ -23,7 +24,8 @@ class CaliController extends Controller
     {
         //
         $calis = Cali::withTrashed()->paginate(10);
-        return view('master.cali.index',compact('calis'));
+        $vals04 = TypeValue::where('type','04')->pluck('text', 'value');
+        return view('master.cali.index',compact('calis','vals04'));
     }
 
     /**
@@ -75,7 +77,8 @@ class CaliController extends Controller
                     ->where('satart_date', $start_date)
                     ->firstOrFail();
 
-        return view('master.cali.edit', compact('cali'));
+        $vals04 = TypeValue::where('type','04')->pluck('text', 'value');
+        return view('master.cali.edit', compact('cali','vals04'));
     }
 
     /**
@@ -116,8 +119,6 @@ class CaliController extends Controller
         //
         [$type, $start_date] = explode($sep, $id);
 
-        $material = Material::withTrashed()->findOrFail($id);
-
         $cali = Cali::withTrashed()
                     ->where('type', $type)
                     ->where('start_date', $start_date)
@@ -133,5 +134,6 @@ class CaliController extends Controller
             $request->session()->flash('message','削除しました');
         }
 
-        return redirect()->route('cali.index');    }
+        return redirect()->route('cali.index');
+    }
 }

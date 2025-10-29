@@ -20,24 +20,24 @@
         <!-- これもコメント -->
         <x-message :message="session('message')" />
 
-        <table class="ztable border-separate border border-gray-400">
+        <table class="ztable fixed-1">
             <thead class="text-center">
                 <tr>
-                    <th class="p-2 border border-gray-300">{{__('distance')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('cost')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
-                    <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
+                    <th>{{__('distance')}}</th>
+                    <th>{{__('cost')}}</th>
+                    <th>{{__('created_at')}}</th>
+                    <th>{{__('updated_at')}}</th>
+                    <th colspan=2>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($rcosts as $rcost)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$rcost->distance}}</td>
-                    <td class="p-2 border border-gray-300 text-right">{{number_format($rcost->cost)}}</td>
-                    <td class="p-2 border border-gray-300">{{$rcost->created_at}}</td>
-                    <td class="p-2 border border-gray-300">{{$rcost->updated_at}}</td>
-                    <td class="p-2 border border-gray-300">
+                    <td>{{$rcost->distance}}</td>
+                    <td class="text-right">{{number_format($rcost->cost)}}</td>
+                    <td>{{$rcost->created_at}}</td>
+                    <td>{{$rcost->updated_at}}</td>
+                    <td class="text-center">
                         <a href="{{route('remotecost.edit',$rcost)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
@@ -45,7 +45,7 @@
                             </button>
                         </a>
                     </td>
-                    <td class="p-2 border border-gray-300">
+                    <td class="text-center">
                         <form method="post" action="{{route('remotecost.destroy',$rcost)}}">
                             @csrf
                             @method('delete')

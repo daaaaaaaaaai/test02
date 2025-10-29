@@ -20,26 +20,26 @@
         <!-- これもコメント -->
         <x-message :message="session('message')" />
 
-        <table class="ztable border-separate border border-gray-400">
+        <table class="ztable fixed-2">
             <thead class="text-center">
                 <tr>
-                    <th class="p-2 border border-gray-300">{{__('type')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('value')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('text')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
-                    <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
+                    <th>{{__('type')}}</th>
+                    <th>{{__('value')}}</th>
+                    <th>{{__('text')}}</th>
+                    <th>{{__('created_at')}}</th>
+                    <th>{{__('updated_at')}}</th>
+                    <th colspan=2>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($values as $value)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$value->type}}</td>
-                    <td class="p-2 border border-gray-300">{{$value->value}}</td>
-                    <td class="p-2 border border-gray-300">{{$value->text}}</td>
-                    <td class="p-2 border border-gray-300">{{$value->created_at}}</td>
-                    <td class="p-2 border border-gray-300">{{$value->updated_at}}</td>
-                    <td class="p-2 border border-gray-300">
+                    <td>{{$types[$value->type] ?? ''}}</td>
+                    <td>{{$value->value}}</td>
+                    <td>{{$value->text}}</td>
+                    <td>{{$value->created_at}}</td>
+                    <td>{{$value->updated_at}}</td>
+                    <td class="text-center">
                         <a href="{{route('typevalue.edit',$value)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
@@ -47,7 +47,7 @@
                             </button>
                         </a>
                     </td>
-                    <td class="p-2 border border-gray-300">
+                    <td class="text-center">
                         <form method="post" action="{{route('typevalue.destroy',$value)}}">
                             @csrf
                             @method('delete')
@@ -59,9 +59,6 @@
                     </td>
                 </tr>
                 @endforeach
-                <div class="mb-4">
-                    {{ $values->links() }}
-                </div>
             </tbody>
         </table>
     </div>

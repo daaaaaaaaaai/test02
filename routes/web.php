@@ -21,6 +21,8 @@ use App\Http\Controllers\Masters\MaterialController;
 use App\Http\Controllers\Masters\CustomerController;
 use App\Http\Controllers\Masters\LisencePlateCostController;
 use App\Http\Controllers\Masters\CaliController;
+use App\Http\Controllers\Masters\SalesExpenseController;
+use App\Http\Controllers\Masters\SuzukiDataController;
 
 // トランザクションコントローラ
 use App\Http\Controllers\Transactions\QuotationController;
@@ -62,6 +64,8 @@ Route::resource('material', MaterialController::class);                     // (
 Route::resource('customer', CustomerController::class);                     // (マスタ)顧客
 Route::resource('lisenceplatecost', LisencePlateCostController::class);     // (マスタ)ナンバープレート費用
 Route::resource('cali', CaliController::class);                             // (マスタ)自賠責保険
+Route::resource('salesexpense', SalesExpenseController::class);             // (マスタ)新車販売諸経費(乗りだし)
+Route::resource('suzukidata', SuzukiDataController::class);                 // (マスタ)車両標準データ
 Route::resource('quotation', QuotationController::class);                   // (トランザクション)見積
 Route::resource('salesorder', SalesOrderController::class);                 // (トランザクション)受注
 Route::resource('invoice', InvoiceController::class);                       // (トランザクション)請求

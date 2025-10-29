@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customizes;
 
 use App\Models\Customizes\TypeValue;
+use App\Models\Customizes\Type;
 //use Illuminate\Http\Request;
 use App\Http\Requests\TypeValueRequest;
 
@@ -22,8 +23,9 @@ class TypeValueController extends Controller
     public function index()
     {
         //
-        $values=TypeValue::paginate(10);
-        return view('customize.typevalue.index',compact('values'));
+        $values=TypeValue::all();
+        $types=Type::all()->pluck('text','type');
+        return view('customize.typevalue.index',compact('values','types'));
     }
 
     /**
@@ -74,8 +76,9 @@ class TypeValueController extends Controller
         $value = TypeValue::where('type', $type)
                           ->where('value', $value)
                           ->firstOrFail();
+        $types=Type::all();
 
-        return view('customize.typevalue.edit', compact('value'));
+        return view('customize.typevalue.edit', compact('value','types'));
     }
 
     /**

@@ -37,6 +37,8 @@ return [
     'customer' => '顧客マスタ',
     'lisence_plate_cost' => 'ナンバープレート費用マスタ',
     'compulsory_automobile_liability_insurance' => '自賠責保険マスタ',
+    'sales_expenses' => '新車販売諸経費(乗りだし)マスタ',
+    'suzuki_data' => '車両標準データマスタ',
 
     'classification' => '分類',
     'country' => '国',

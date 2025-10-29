@@ -20,24 +20,24 @@
         <!-- これもコメント -->
         <x-message :message="session('message')" />
 
-        <table class="ztable border-separate border border-gray-400">
+        <table class="ztable fixed-1">
             <thead class="text-center">
                 <tr>
-                    <th class="p-2 border border-gray-300">{{__('class_code')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('class_name')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
-                    <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
+                    <th>{{__('class_code')}}</th>
+                    <th>{{__('class_name')}}</th>
+                    <th>{{__('created_at')}}</th>
+                    <th>{{__('updated_at')}}</th>
+                    <th colspan=2>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($classifications as $classification)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$classification->class_code}}</td>
-                    <td class="p-2 border border-gray-300">{{$classification->class_name}}</td>
-                    <td class="p-2 border border-gray-300">{{$classification->created_at}}</td>
-                    <td class="p-2 border border-gray-300">{{$classification->updated_at}}</td>
-                    <td class="p-2 border border-gray-300">
+                    <td>{{$classification->class_code}}</td>
+                    <td>{{$classification->class_name}}</td>
+                    <td>{{$classification->created_at}}</td>
+                    <td>{{$classification->updated_at}}</td>
+                    <td class="text-center">
                         <a href="{{route('classification.edit',$classification)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
@@ -45,7 +45,7 @@
                             </button>
                         </a>
                     </td>
-                    <td class="p-2 border border-gray-300">
+                    <td class="text-center">
                         <form method="post" action="{{route('classification.destroy',$classification)}}">
                             @csrf
                             @method('delete')
