@@ -27,8 +27,8 @@ class TypeValueSeeder extends Seeder
         TypeValue::create(['type'=>'03','value'=>'04','text'=>'小型二輪','created_by'=>'admin','changed_by'=>'admin',]);
         TypeValue::create(['type'=>'03','value'=>'05','text'=>'小型ETC','created_by'=>'admin','changed_by'=>'admin',]);
         TypeValue::create(['type'=>'04','value'=>'01','text'=>'原付','created_by'=>'admin','changed_by'=>'admin',]);
-        TypeValue::create(['type'=>'04','value'=>'03','text'=>'軽二輪','created_by'=>'admin','changed_by'=>'admin',]);
-        TypeValue::create(['type'=>'04','value'=>'04','text'=>'小型二輪','created_by'=>'admin','changed_by'=>'admin',]);
+        TypeValue::create(['type'=>'04','value'=>'02','text'=>'軽二輪','created_by'=>'admin','changed_by'=>'admin',]);
+        TypeValue::create(['type'=>'04','value'=>'03','text'=>'小型二輪','created_by'=>'admin','changed_by'=>'admin',]);
         TypeValue::create(['type'=>'05','value'=>'01','text'=>'原付','created_by'=>'admin','changed_by'=>'admin',]);
         TypeValue::create(['type'=>'05','value'=>'02','text'=>'原付MT','created_by'=>'admin','changed_by'=>'admin',]);
         TypeValue::create(['type'=>'05','value'=>'03','text'=>'軽二輪','created_by'=>'admin','changed_by'=>'admin',]);
@@ -49,5 +49,7 @@ class TypeValueSeeder extends Seeder
         TypeValue::create(['type'=>'09','value'=>'02','text'=>'非車検車','created_by'=>'admin','changed_by'=>'admin',]);
         TypeValue::create(['type'=>'10','value'=>'01','text'=>'原付','created_by'=>'admin','changed_by'=>'admin',]);
         TypeValue::create(['type'=>'10','value'=>'02','text'=>'自二(スズキ)','created_by'=>'admin','changed_by'=>'admin',]);
+        TypeValue::create(['type'=>'11','value'=>'01','text'=>'NEW','created_by'=>'admin','changed_by'=>'admin',]);
+        TypeValue::create(['type'=>'11','value'=>'02','text'=>'常時展示店','created_by'=>'admin','changed_by'=>'admin',]);
     }
 }

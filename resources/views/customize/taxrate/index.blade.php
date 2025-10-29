@@ -20,36 +20,36 @@
         <!-- これもコメント -->
         <x-message :message="session('message')" />
 
-        <table class="ztable border-separate border border-gray-400">
+        <table class="ztable fixed-2">
             <thead class="text-center">
                 <tr>
-                    <th class="p-2 border border-gray-300">{{__('tax_code')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('start_date')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('end_date')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('tax_rate')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('normal_rate_flg')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('text')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
-                    <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
+                    <th>{{__('tax_code')}}</th>
+                    <th>{{__('start_date')}}</th>
+                    <th>{{__('end_date')}}</th>
+                    <th>{{__('tax_rate')}}</th>
+                    <th>{{__('normal_rate_flg')}}</th>
+                    <th>{{__('text')}}</th>
+                    <th>{{__('created_at')}}</th>
+                    <th>{{__('updated_at')}}</th>
+                    <th colspan=2>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($taxRates as $taxRate)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$taxRate->tax_code}}</td>
-                    <td class="p-2 border border-gray-300">{{$taxRate->start_date}}</td>
-                    <td class="p-2 border border-gray-300">{{$taxRate->end_date}}</td>
-                    <td class="p-2 border border-gray-300 text-right">{{number_format($taxRate->tax_rate,2)}}</td>
+                    <td>{{$taxRate->tax_code}}</td>
+                    <td>{{$taxRate->start_date}}</td>
+                    <td>{{$taxRate->end_date}}</td>
+                    <td class="text-right">{{number_format($taxRate->tax_rate,1)}}</td>
                     <!-- flg="1"はチェックONにする
                          inputタグのdisabledは入力不可にする -->
-                    <td class="p-2 border border-gray-300 text-center">
+                    <td class="text-center">
                         <input type="checkbox" name="is_normal" value="1" disabled="disabled" <?php echo ($taxRate->normal_rate_flg == 1) ? 'checked' : ''; ?>>
                     </td>
-                    <td class="p-2 border border-gray-300">{{$taxRate->text}}</td>
-                    <td class="p-2 border border-gray-300">{{$taxRate->created_at}}</td>
-                    <td class="p-2 border border-gray-300">{{$taxRate->updated_at}}</td>
-                    <td class="p-2 border border-gray-300">
+                    <td>{{$taxRate->text}}</td>
+                    <td>{{$taxRate->created_at}}</td>
+                    <td>{{$taxRate->updated_at}}</td>
+                    <td class="text-center">
                         <a href="{{route('taxrate.edit',$taxRate)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
@@ -57,7 +57,7 @@
                             </button>
                         </a>
                     </td>
-                    <td class="p-2 border border-gray-300">
+                    <td class="text-center">
                         <form method="post" action="{{route('taxrate.destroy',$taxRate)}}">
                             @csrf
                             @method('delete')

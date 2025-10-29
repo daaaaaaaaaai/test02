@@ -20,30 +20,30 @@
         <!-- これもコメント -->
         <x-message :message="session('message')" />
 
-        <table class="ztable border-separate border border-gray-400">
+        <table class="ztable fixed-1">
             <thead class="text-center">
                 <tr>
-                    <th class="p-2 border border-gray-300">{{__('number_range')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('number_from')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('number_to')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('number_current')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('text')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
-                    <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
+                    <th>{{__('number_range')}}</th>
+                    <th>{{__('number_from')}}</th>
+                    <th>{{__('number_to')}}</th>
+                    <th>{{__('number_current')}}</th>
+                    <th>{{__('text')}}</th>
+                    <th>{{__('created_at')}}</th>
+                    <th>{{__('updated_at')}}</th>
+                    <th colspan=2>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($numberRanges as $numberRange)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$numberRange->number_range}}</td>
-                    <td class="p-2 border border-gray-300">{{$numberRange->number_from}}</td>
-                    <td class="p-2 border border-gray-300">{{$numberRange->number_to}}</td>
-                    <td class="p-2 border border-gray-300">{{$numberRange->number_current}}</td>
-                    <td class="p-2 border border-gray-300">{{$numberRange->text}}</td>
-                    <td class="p-2 border border-gray-300">{{$numberRange->created_at}}</td>
-                    <td class="p-2 border border-gray-300">{{$numberRange->updated_at}}</td>
-                    <td class="p-2 border border-gray-300">
+                    <td>{{$numberRange->number_range}}</td>
+                    <td>{{$numberRange->number_from}}</td>
+                    <td>{{$numberRange->number_to}}</td>
+                    <td>{{$numberRange->number_current}}</td>
+                    <td>{{$numberRange->text}}</td>
+                    <td>{{$numberRange->created_at}}</td>
+                    <td>{{$numberRange->updated_at}}</td>
+                    <td class="text-center">
                         <a href="{{route('numberrange.edit',$numberRange)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
@@ -51,7 +51,7 @@
                             </button>
                         </a>
                     </td>
-                    <td class="p-2 border border-gray-300">
+                    <td class="text-center">
                         <form method="post" action="{{route('numberrange.destroy',$numberRange)}}">
                             @csrf
                             @method('delete')

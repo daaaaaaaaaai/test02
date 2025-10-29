@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         //
         $users=User::withTrashed()->paginate(10);
-        return view('user.index',compact('users'));
+        return view('master.user.index',compact('users'));
     }
 
     /**
@@ -24,7 +24,7 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('user.create');
+        return view('master.user.create');
     }
 
     /**
@@ -69,7 +69,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
-        return view('user.edit',compact('user'));
+        return view('master.user.edit',compact('user'));
     }
 
     /**

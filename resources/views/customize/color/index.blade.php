@@ -20,26 +20,26 @@
         <!-- これもコメント -->
         <x-message :message="session('message')" />
 
-        <table class="ztable border-separate border border-gray-400">
+        <table class="ztable fixed-1">
             <thead class="text-center">
                 <tr>
-                    <th class="p-2 border border-gray-300">{{__('color_code')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('color_name1')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('color_name2')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
-                    <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
+                    <th>{{__('color_code')}}</th>
+                    <th>{{__('color_name1')}}</th>
+                    <th>{{__('color_name2')}}</th>
+                    <th>{{__('created_at')}}</th>
+                    <th>{{__('updated_at')}}</th>
+                    <th colspan=2>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($colors as $color)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$color->color_code}}</td>
-                    <td class="p-2 border border-gray-300">{{$color->color_name1}}</td>
-                    <td class="p-2 border border-gray-300">{{$color->color_name2}}</td>
-                    <td class="p-2 border border-gray-300">{{$color->created_at}}</td>
-                    <td class="p-2 border border-gray-300">{{$color->updated_at}}</td>
-                    <td class="p-2 border border-gray-300">
+                    <td>{{$color->color_code}}</td>
+                    <td>{{$color->color_name1}}</td>
+                    <td>{{$color->color_name2}}</td>
+                    <td>{{$color->created_at}}</td>
+                    <td>{{$color->updated_at}}</td>
+                    <td class="text-center">
                         <a href="{{route('color.edit',$color)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
@@ -47,7 +47,7 @@
                             </button>
                         </a>
                     </td>
-                    <td class="p-2 border border-gray-300">
+                    <td class="text-center">
                         <form method="post" action="{{route('color.destroy',$color)}}">
                             @csrf
                             @method('delete')

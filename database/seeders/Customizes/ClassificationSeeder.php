@@ -14,11 +14,9 @@ class ClassificationSeeder extends Seeder
     public function run(): void
     {
         //
-        Classification::create(['class_code'=>'001001','class_name'=>'大型','created_by'=>'admin','changed_by'=>'admin',]);
-        Classification::create(['class_code'=>'001002','class_name'=>'中型','created_by'=>'admin','changed_by'=>'admin',]);
-        Classification::create(['class_code'=>'001003','class_name'=>'小型','created_by'=>'admin','changed_by'=>'admin',]);
-        Classification::create(['class_code'=>'002001','class_name'=>'部品','created_by'=>'admin','changed_by'=>'admin',]);
-        Classification::create(['class_code'=>'009001','class_name'=>'サービス','created_by'=>'admin','changed_by'=>'admin',]);
-        Classification::create(['class_code'=>'999001','class_name'=>'その他','created_by'=>'admin','changed_by'=>'admin',]);
+        Classification::create(['class_code'=>'001','class_name'=>'バイク','created_by'=>'admin','changed_by'=>'admin',]);
+        Classification::create(['class_code'=>'002','class_name'=>'パーツ','created_by'=>'admin','changed_by'=>'admin',]);
+        Classification::create(['class_code'=>'009','class_name'=>'サービス','created_by'=>'admin','changed_by'=>'admin',]);
+        Classification::create(['class_code'=>'999','class_name'=>'その他','created_by'=>'admin','changed_by'=>'admin',]);
     }
 }

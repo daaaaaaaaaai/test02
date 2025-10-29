@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Masters;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\Masters\LisencePlateCost;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Customizes\Prefecture;
 //use Illuminate\Http\Request;
 use App\Http\Requests\LisencePlateCostRequest;
@@ -26,7 +26,8 @@ class LisencePlateCostController extends Controller
         //
         //$costs = LisencePlateCost::withTrashed()->paginate(20);
         $costs = LisencePlateCost::withTrashed()->get();
-        return view('master.lisenceplatecost.index', compact('costs'));
+        $prefs=Prefecture::all()->pluck('text', 'prefecture');
+        return view('master.lisenceplatecost.index', compact('costs','prefs'));
     }
 
     /**
@@ -35,8 +36,8 @@ class LisencePlateCostController extends Controller
     public function create()
     {
         //
-        $prefs=Prefecture::all();
         $cost=new LisencePlateCost;
+        $prefs=Prefecture::all()->pluck('text', 'prefecture');
         return view('master.lisenceplatecost.edit', compact('cost','prefs'))->with('mode', 'create');
     }
 
@@ -82,7 +83,7 @@ class LisencePlateCostController extends Controller
         $cost = LisencePlateCost::where('prefecture', $prefecture)
                                 ->where('pref_etc', $pref_etc)
                                 ->firstOrFail();
-        $prefs=Prefecture::all();
+        $prefs=Prefecture::all()->pluck('text', 'prefecture');
         return view('master.lisenceplatecost.edit', compact('cost','prefs'))->with('mode', 'edit');
     }
 

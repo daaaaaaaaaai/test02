@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('calis', function (Blueprint $table) {
-            $table->char('type',2)->comment('種別');
             $table->date('start_date')->comment('開始日');
+            $table->char('type',2)->comment('種別');
             $table->double('month_00',9,2)->comment('加入なし')->nullable();
             $table->double('month_12',9,2)->comment('12ヶ月')->nullable();
             $table->double('month_24',9,2)->comment('24ヶ月')->nullable();
@@ -29,8 +29,9 @@ return new class extends Migration
             $table->timestamps();
 
             $table->comment('自賠責保険');
-            $table->primary(['type','start_date']);
-            $table->unique(['type','start_date']);
+            $table->primary(['start_date','type']);
+            $table->unique(['start_date','type']);
+            $table->softDeletes();
         });
     }
 

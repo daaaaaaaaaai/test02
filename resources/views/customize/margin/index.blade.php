@@ -20,24 +20,24 @@
         <!-- これもコメント -->
         <x-message :message="session('message')" />
 
-        <table class="ztable border-separate border border-gray-400">
+        <table class="ztable fixed-1">
             <thead class="text-center">
                 <tr>
-                    <th class="p-2 border border-gray-300">{{__('type')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('rate_m')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
-                    <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
-                    <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
+                    <th>{{__('type')}}</th>
+                    <th>{{__('rate_m')}}</th>
+                    <th>{{__('created_at')}}</th>
+                    <th>{{__('updated_at')}}</th>
+                    <th colspan=2>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($margins as $margin)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$margin->type}}</td>
-                    <td class="p-2 border border-gray-300 text-right">{{number_format($margin->rate,2)}}</td>
-                    <td class="p-2 border border-gray-300">{{$margin->created_at}}</td>
-                    <td class="p-2 border border-gray-300">{{$margin->updated_at}}</td>
-                    <td class="p-2 border border-gray-300">
+                    <td>{{$margin->type}}</td>
+                    <td class="text-right">{{number_format($margin->rate,2)}}</td>
+                    <td>{{$margin->created_at}}</td>
+                    <td>{{$margin->updated_at}}</td>
+                    <td class="text-center">
                         <a href="{{route('margin.edit',$margin)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
@@ -45,7 +45,7 @@
                             </button>
                         </a>
                     </td>
-                    <td class="p-2 border border-gray-300">
+                    <td class="text-center">
                         <form method="post" action="{{route('margin.destroy',$margin)}}">
                             @csrf
                             @method('delete')

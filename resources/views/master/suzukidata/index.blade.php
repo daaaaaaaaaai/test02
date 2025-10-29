@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', __('Prefecture'))
+@section('title', __('SuzukiData'))
 
 @section('content_header')
-    <h1>{{__('Prefecture')}}</h1>
+    <h1>{{__('SuzukiData')}}</h1>
     <div class="text-right flex text-sm">
-        <a href="{{route('prefecture.create')}}">
+        <a href="{{route('suzukidata.create')}}">
             <button class="btn btn-primary">
                 <span class="fas fa-solid fa-plus"></span>
                 &nbsp{{__('create')}}
@@ -23,22 +23,22 @@
         <table class="ztable fixed-1">
             <thead class="text-center">
                 <tr>
-                    <th>{{__('prefecture')}}</th>
-                    <th>{{__('text')}}</th>
+                    <th>{{__('start_date')}}</th>
                     <th>{{__('created_at')}}</th>
                     <th>{{__('updated_at')}}</th>
-                    <th colspan=2>{{__('operation')}}</th>
+                    <th>{{__('deleted_at')}}</th>
+                    <th colspan=3>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($prefectures as $prefecture)
+                @foreach($datas as $data)
                 <tr>
-                    <td>{{$prefecture->prefecture}}</td>
-                    <td>{{$prefecture->text}}</td>
-                    <td>{{$prefecture->created_at}}</td>
-                    <td>{{$prefecture->updated_at}}</td>
+                    <td>{{$data->start_date}}</td>
+                    <td>{{$data->created_at}}</td>
+                    <td>{{$data->updated_at}}</td>
+                    <td>{{$data->deleted_at}}</td>
                     <td class="text-center">
-                        <a href="{{route('prefecture.edit',$prefecture)}}">
+                        <a href="{{route('suzukidata.edit',$data)}}">
                             <button class="btn btn-outline-primary">
                                 <span class="fas fa-pen"></span>
                                 &nbsp{{__('change')}}
@@ -46,7 +46,7 @@
                         </a>
                     </td>
                     <td class="text-center">
-                        <form method="post" action="{{route('prefecture.destroy',$prefecture)}}">
+                        <form method="post" action="{{route('suzukidata.destroy',$data->start_date)}}">
                             @csrf
                             @method('delete')
                             <button class="btn btn-outline-primary">
@@ -58,7 +58,7 @@
                 </tr>
                 @endforeach
                 <div class="mb-4">
-                    {{ $prefectures->links() }}
+                    {{ $datas->links() }}
                 </div>
             </tbody>
         </table>

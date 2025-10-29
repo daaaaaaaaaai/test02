@@ -37,13 +37,14 @@
                     <th class="p-2 border border-gray-300">{{__('receipt_fee')}}</th>
                     <th class="p-2 border border-gray-300">{{__('created_at')}}</th>
                     <th class="p-2 border border-gray-300">{{__('updated_at')}}</th>
+                    <th class="p-2 border border-gray-300">{{__('deleted_at')}}</th>
                     <th class="p-2 border border-gray-300" colspan=3>{{__('operation')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($calis as $cali)
                 <tr>
-                    <td class="p-2 border border-gray-300">{{$cali->type}}</td>
+                    <td class="p-2 border border-gray-300">{{$vals04[$cali->type] ?? ''}}</td>
                     <td class="p-2 border border-gray-300">{{$cali->start_date}}</td>
                     <td class="p-2 border border-gray-300 text-right">{{number_format($cali->month_00)}}</td>
                     <td class="p-2 border border-gray-300 text-right">{{number_format($cali->month_12)}}</td>
@@ -57,6 +58,7 @@
                     <td class="p-2 border border-gray-300 text-right">{{number_format($cali->receipt_fee)}}</td>
                     <td class="p-2 border border-gray-300">{{$cali->created_at}}</td>
                     <td class="p-2 border border-gray-300">{{$cali->updated_at}}</td>
+                    <td class="p-2 border border-gray-300">{{$cali->deleted_at}}</td>
                     <td class="p-2 border border-gray-300">
                         <a href="{{route('cali.edit',$cali)}}">
                             <button class="btn btn-outline-primary">
