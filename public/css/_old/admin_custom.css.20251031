@@ -40,7 +40,7 @@
 }
 
 /* ================================= */
-/* 1列目固定（共通ベース） */
+/* 1列目固定（共通） */
 .ztable th:first-of-type,
 .ztable td:first-of-type {
   position: sticky;
@@ -53,40 +53,23 @@
 /* ================================= */
 /* 固定列数ごとのクラス切り替え */
 
-/* === fixed-0（列固定なし・ヘッダのみ固定） === */
-.ztable.fixed-0 th:first-of-type {
-  position: sticky !important;
-  top: 0 !important;                 /* ヘッダは固定 */
-  left: auto !important;             /* 横方向固定なし */
-  background: #355c83 !important;
-  color: #ffffff !important;
-  z-index: 15 !important;
-}
-
-.ztable.fixed-0 td:first-of-type {
-  position: static !important;       /* 通常スクロール */
-  background: #ffffff !important;
-  color: #333333 !important;
-  z-index: auto !important;
-}
-
-/* === fixed-1（1列固定） === */
+/* 1列固定 */
 .ztable.fixed-1 th:nth-of-type(n+2),
 .ztable.fixed-1 td:nth-of-type(n+2) {
   position: static; /* 2列目以降は固定しない */
 }
 
-/* === fixed-2（2列固定） === */
+/* 2列固定 */
 .ztable.fixed-2 th:nth-of-type(2),
 .ztable.fixed-2 td:nth-of-type(2) {
   position: sticky;
-  left: 0px;       /* 1列目の幅分ずらす（固定幅と一致させる） */
+  left: 0px;       /* 1列目の幅分ずらす */
   background: #355c83;
   color: #ffffff;
   z-index: 9;
 }
 
-/* === fixed-3（3列固定） === */
+/* 3列固定 */
 .ztable.fixed-3 th:nth-of-type(2),
 .ztable.fixed-3 td:nth-of-type(2) {
   position: sticky;
@@ -103,30 +86,4 @@
   background: #355c83;
   color: #ffffff;
   z-index: 8;
-}
-
-
-/*---------------------------------------------------------------------
-//  メンテナンス画面のth部分の背景色設定
----------------------------------------------------------------------*/
-.zmente th{
-    background-color: #355c83;      /* 背景色 */
-    color: #ffffff;                 /* 文字色 */
-    font-size: 0.85rem;             /* 文字サイズ */
-    font-weight: normal;            /* やや太め */
-    padding: 0.5rem;
-}
-
-/* 必須ラベル、任意ラベル用 */
-.label-required {
-    background-color: red;
-}
-.label-option {
-    background-color: green;
-}
-
-/* テーブルの項目名のセルに使用する少し濃い目の青 */
-.bg-summer-sky {
-    color: #ffffff;
-    background-color: #42afe3;
 }

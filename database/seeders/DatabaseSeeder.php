@@ -20,6 +20,8 @@ use Database\Seeders\Customizes\TaxRateSeeder;
 use Database\Seeders\Customizes\TypeSeeder;
 use Database\Seeders\Customizes\TypeValueSeeder;
 use Database\Seeders\Customizes\UnitSeeder;
+use Database\Seeders\Customizes\StatusSeeder;
+use Database\Seeders\Customizes\StatusValueSeeder;
 
 // マスタSeeder
 use Database\Seeders\Masters\CaliSeeder;
@@ -32,6 +34,7 @@ use Database\Seeders\Masters\SuzukiDataSeeder;
 
 // トランザクションSeeder
 use Database\Seeders\Transactions\SalesOrderSeeder;
+use Database\Seeders\Transactions\InventorySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -64,6 +67,8 @@ class DatabaseSeeder extends Seeder
             TypeSeeder::Class,
             TypeValueSeeder::Class,
             UnitSeeder::class,
+            StatusSeeder::Class,
+            StatusValueSeeder::Class,
 
             CaliSeeder::class,
             CustomerSeeder::class,
@@ -74,6 +79,7 @@ class DatabaseSeeder extends Seeder
             SuzukiDataSeeder::class,
 
             SalesOrderSeeder::class,
+            InventorySeeder::class,
         ]);
     }
 }

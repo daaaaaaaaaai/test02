@@ -14,6 +14,8 @@ use App\Http\Controllers\Customizes\MarginController;
 use App\Http\Controllers\Customizes\RemoteCostController;
 use App\Http\Controllers\Customizes\TypeController;
 use App\Http\Controllers\Customizes\TypeValueController;
+use App\Http\Controllers\Customizes\StatusController;
+use App\Http\Controllers\Customizes\StatusValueController;
 
 // マスタコントローラ
 use App\Http\Controllers\Masters\UserController;
@@ -59,6 +61,8 @@ Route::resource('margin',MarginController::class);                          // (
 Route::resource('remotecost',RemoteCostController::class);                  // (カスタマイズ)遠方登録費用
 Route::resource('type',TypeController::class);                              // (カスタマイズ)種別
 Route::resource('typevalue',TypeValueController::class);                    // (カスタマイズ)種別値
+Route::resource('status',StatusController::class);                          // (カスタマイズ)種別
+Route::resource('statusvalue',StatusValueController::class);                // (カスタマイズ)種別値
 Route::resource('user', UserController::class);                             // (マスタ)ユーザ
 Route::resource('material', MaterialController::class);                     // (マスタ)商品
 Route::resource('customer', CustomerController::class);                     // (マスタ)顧客

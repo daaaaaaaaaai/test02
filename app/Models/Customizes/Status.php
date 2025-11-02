@@ -5,17 +5,18 @@ namespace App\Models\Customizes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Type extends BaseModel
+class Status extends Model
 {
+    //
     use HasFactory;
 
-    protected $primaryKey = 'type';
+    protected $primaryKey = 'status';
     protected $keyType = 'string';
     public $incrementing = false;
 
     //
     protected $fillable=[
-        'type',
+        'status',
         'text',
         'created_by',
         'changed_by',

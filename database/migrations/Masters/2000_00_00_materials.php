@@ -11,7 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
         Schema::create('materials', function (Blueprint $table) {
             $table->char('material_code',40)->comment('商品コード');
             $table->string('material_name',60)->comment('商品名');

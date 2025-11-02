@@ -357,6 +357,8 @@ return [
                 ['text' => 'japanese_calendar', 'url' => 'japanesecalendar', 'icon' => '',],
                 ['text' => 'type',              'url' => 'type',             'icon' => '',],
                 ['text' => 'type_value',        'url' => 'typevalue',        'icon' => '',],
+                ['text' => 'status',            'url' => 'status',           'icon' => '',],
+                ['text' => 'status_value',      'url' => 'statusvalue',      'icon' => '',],
                 ['text' => 'response_rate',     'url' => 'responserate',     'icon' => '',],
                 ['text' => 'color',             'url' => 'color',            'icon' => '',],
                 ['text' => 'margin',            'url' => 'margin',           'icon' => '',],
