@@ -30,7 +30,7 @@ class CustomerController extends Controller
     {
         //
         $prefectures=Prefecture::all();
-        $customer=new customer;
+        $customer=new Customer;
         return view('master.customer.edit',compact('customer','prefectures'))->with('mode','create');
     }
 

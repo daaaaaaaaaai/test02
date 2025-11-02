@@ -11,7 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
         Schema::create('customers', function (Blueprint $table) {
             $table->char('cust_code',10)->comment('顧客コード');
             $table->string('name_last',40)->comment('姓');

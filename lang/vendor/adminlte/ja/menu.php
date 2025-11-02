@@ -53,6 +53,8 @@ return [
     'remote_cost' => '遠方登録費用',
     'type' => '種別',
     'type_value' => '種別値',
+    'status' => 'ステータス',
+    'status_value' => 'ステータス値',
     '' => '',
     '' => '',
     '' => '',

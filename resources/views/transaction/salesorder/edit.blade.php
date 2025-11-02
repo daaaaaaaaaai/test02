@@ -61,7 +61,7 @@
                     @enderror
                 </td>
                 <td>
-                    <button type="button" id="inputCust" class="btn outline-primary text-sm">顧客情報入力</button>
+                    <button class="btn btn-outline-primary">顧客情報入力</button>
                 </td>
             </tr>
             <tr>
@@ -111,8 +111,6 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-            </tr>
-            <tr>
                 <!-- 車体色 -->
                 <th class="border border-gray-400">{{__('color')}}</th>
                 <td>
@@ -124,7 +122,6 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-            </tr>
                 <!-- モデル -->
                 <th class="border border-gray-400">{{__('model')}}</th>
                 <td>
@@ -137,19 +134,31 @@
                         </span>
                     @enderror
             </tr>
-                <!-- メーカー希望小売価格(税込) -->
-                <th class="border border-gray-400">{{__('price_maker')}}</th>
+            <tr>
+                <!-- メーカー希望小売価格 -->
+                <th class="border border-gray-400">{{__('maker_price')}}</th>
                 <td>
-                    <input type="text" name="price_maker"
-                        class="form-control @error('price_maker') is-invalid @enderror"
-                        value="{{old('price_maker',$items->price_maker)}}" autofocus/>
-                    @error('price_maker')
+                    <input type="text" name="maker_price"
+                        class="form-control @error('maker_price') is-invalid @enderror"
+                        value="{{old('maker_price',$items->maker_price)}}" autofocus/>
+                    @error('maker_price')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-            <tr>
-                <!-- お値引き(税込) -->
+                <!-- 販売価格 -->
+                <th class="border border-gray-400">{{__('unit_price')}}</th>
+                <td>
+                    <input type="text" name="unit_price"
+                        class="form-control @error('unit_price') is-invalid @enderror"
+                        value="{{old('unit_price',$items->unit_price)}}" autofocus/>
+                    @error('unit_price')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+            </tr>
+                <!-- 値引 -->
                 <th class="border border-gray-400">{{__('discount')}}</th>
                 <td>
                     <input type="text" name="discount"
@@ -160,8 +169,63 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                <!-- 粗利 -->
+                <th class="border border-gray-400">{{__('margin')}}</th>
+                <td>
+                    <input type="text" name="margin"
+                        class="form-control @error('margin') is-invalid @enderror"
+                        value="{{old('margin',$items->margin)}}" autofocus/>
+                    @error('margin')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                <!-- 粗利率 -->
+                <th class="border border-gray-400">{{__('margin_rate')}}</th>
+                <td>
+                    <input type="text" name="margin_rate"
+                        class="form-control @error('margin_rate') is-invalid @enderror"
+                        value="{{old('margin_rate',$items->margin_rate)}}" autofocus/>
+                    @error('marmargin_rategin')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
             </tr>
             <tr>
+                <!-- 追加値引 -->
+                <th class="border border-gray-400">{{__('discount_add')}}</th>
+                <td>
+                    <input type="text" name="discount_add"
+                        class="form-control @error('discount_add') is-invalid @enderror"
+                        value="{{old('discount_add',$items->discount_add)}}" autofocus/>
+                    @error('discount_add')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                <!-- 追加粗利 -->
+                <th class="border border-gray-400">{{__('margin_add')}}</th>
+                <td>
+                    <input type="text" name="margin_add"
+                        class="form-control @error('margin_add') is-invalid @enderror"
+                        value="{{old('margin_add',$items->margin_add)}}" autofocus/>
+                    @error('margin_add')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                <!-- 追加粗利率 -->
+                <th class="border border-gray-400">{{__('margin_rate_add')}}</th>
+                <td>
+                    <input type="text" name="margin_rate_add"
+                        class="form-control @error('margin_rate_add') is-invalid @enderror"
+                        value="{{old('margin_rate_add',$items->margin_rate_add)}}" autofocus/>
+                    @error('margin_rate_add')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
             </tr>
             <tr>
             </tr>

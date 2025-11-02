@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Customizes;
 
-use App\Models\Customizes\Type;
+use App\Http\Controllers\Controller;
+use App\Models\Customizes\Status;
 use Illuminate\Http\Request;
 
-class TypeController extends Controller
+class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,8 @@ class TypeController extends Controller
     public function index()
     {
         //
-        $types=Type::paginate(10);
-        return view('customize.type.index',compact('types'));
+        $stats=Status::paginate(10);
+        return view('customize.status.index',compact('stats'));
     }
 
     /**
@@ -23,7 +24,7 @@ class TypeController extends Controller
     public function create()
     {
         //
-        return view('customize.type.create');
+        return view('customize.status.create');
     }
 
     /**
@@ -33,20 +34,20 @@ class TypeController extends Controller
     {
         //
         $request->validate([
-            'type' => ['required', 'string', 'max:2', 'unique:'.Type::class],
-            'text' => ['required', 'string'],
+            'status' => ['required', 'string', 'max:20', 'unique:'.Status::class],
+            'text'   => ['required', 'string'],
         ]);
 
-        Type::create($request->all());
+        Status::create($request->all());
 
         $request->session()->flash('message','登録しました');
-        return redirect(route('customize.type.index'));
+        return redirect(route('customize.status.index'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Type $type)
+    public function show(Status $status)
     {
         //
     }
@@ -54,37 +55,37 @@ class TypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Type $type)
+    public function edit(Status $status)
     {
         //
-        return view('customize.type.edit', compact('type'));
+        return view('customize.status.edit', compact('status'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Type $type)
+    public function update(Request $request, Status $status)
     {
         //
         $request->validate([
-            'type' => ['required'],
-            'text' => ['required', 'string'],
+            'status' => ['required'],
+            'text'   => ['required', 'string'],
         ]);
 
-        $type->update($validated);
+        $status->update($validated);
 
         $request->session()->flash('message','更新しました');
-        return redirect(route('type.index'));
+        return redirect(route('status.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, Type $type)
+    public function destroy(Request $request, Status $status)
     {
         //
-        $type->delete();
+        $status->delete();
         $request->session()->flash('message','削除しました');
-        return redirect()->route('type.index');
+        return redirect()->route('status.index');
     }
 }
